@@ -1,2 +1,2 @@
-# Natural-Language-Processing-Code-Generation
-Natural Language Processing: Code Generation
+# sql_generation
+Generating SQL question and queries with GPT3
