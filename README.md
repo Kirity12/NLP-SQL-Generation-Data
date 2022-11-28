@@ -1,2 +1,2 @@
-# sql_generation
-Generating SQL question and queries with GPT3
+# SQL Code Generation Data Driven Approach
+Generating SQL queries with GPT3 using different prompts
