@@ -29,6 +29,7 @@ import argparse
 from pathlib import Path
 PARENT_DIR = Path(__file__, '../').resolve()
 sys.path.append(str(PARENT_DIR))
+sys.path.append(str(Path(__file__, '../..').resolve()))
 
 from process_sql import tokenize, get_schema, get_tables_with_alias, Schema, get_sql
 
@@ -480,14 +481,15 @@ def print_scores(scores, etype):
 
 
 def evaluate(etype, kmaps):
-
-    db_dir = r'C:\Users\sganugap\Documents\Kirity Projects\sql_generation-c39846c9d76f296857017c3d7cf9ffb958a4c6ec\data\database'
+    parent = str(Path(__file__, '../../..').resolve())
+    db_dir = parent+r'\data\database'
     plist = []
     glist = []
-    technique = '3'
-    for file in os.listdir(r'C:\Users\sganugap\Documents\Kirity Projects\sql_generation-c39846c9d76f296857017c3d7cf9ffb958a4c6ec\predicted_prompt'+technique):
+    technique = '2'
+    path = parent+r'\predicted_prompt'+technique
+    for file in os.listdir(path):
         if 'example' in file:
-            file_path = os.path.join(r'C:\Users\sganugap\Documents\Kirity Projects\sql_generation-c39846c9d76f296857017c3d7cf9ffb958a4c6ec\predicted_prompt'+technique, file)
+            file_path = os.path.join(path, file)
             with open(file_path) as f:
                 data = json.load(f)
 
