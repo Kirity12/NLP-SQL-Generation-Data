@@ -1,0 +1,28 @@
+
+CREATE TABLE "musical" (
+"Musical_ID" int,
+"Name" text,
+"Year" int,
+"Award" text,
+"Category" text,
+"Nominee" text,
+"Result" text,
+PRIMARY KEY ("Musical_ID")
+);
+
+CREATE TABLE "actor" (
+"Actor_ID" int,
+"Name" text,
+"Musical_ID" int,
+"Character" text,
+"Duration" text,
+"age" int,
+PRIMARY KEY ("Actor_ID"),
+FOREIGN KEY ("Musical_ID") REFERENCES "actor"("Actor_ID")
+);
+
+The tables musical and actor are connected using Musical_ID in musical table which is referenced as Actor_ID in actor table. 
+
+Question: Please show the nominee who has been nominated the greatest number of times.
+Explanation: The nominee who has been nominated the greatest number of times is identified by comparing all nominees and identifying which one appears in database more often than other. This can be achieved using Count() function to count each time a particular name occurs as well asc max().
+SELECT

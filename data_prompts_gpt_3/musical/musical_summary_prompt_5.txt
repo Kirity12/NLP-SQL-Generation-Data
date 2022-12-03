@@ -1,0 +1,28 @@
+
+CREATE TABLE "musical" (
+"Musical_ID" int,
+"Name" text,
+"Year" int,
+"Award" text,
+"Category" text,
+"Nominee" text,
+"Result" text,
+PRIMARY KEY ("Musical_ID")
+);
+
+CREATE TABLE "actor" (
+"Actor_ID" int,
+"Name" text,
+"Musical_ID" int,
+"Character" text,
+"Duration" text,
+"age" int,
+PRIMARY KEY ("Actor_ID"),
+FOREIGN KEY ("Musical_ID") REFERENCES "actor"("Actor_ID")
+);
+
+The tables musical and actor are connected using Musical_ID in musical table which is referenced as Actor_ID in actor table. 
+
+Question: What are the distinct nominees of the musicals with the award that is not "Tony Award"?
+Explanation: The award winners can be related to the musical table by joining it with actor. And this data when compared for "Tony Award" will yield a list of nominees who have won awards other than Tony Awards
+SELECT

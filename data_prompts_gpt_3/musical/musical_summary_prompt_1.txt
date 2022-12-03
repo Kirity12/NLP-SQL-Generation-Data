@@ -1,0 +1,28 @@
+
+CREATE TABLE "musical" (
+"Musical_ID" int,
+"Name" text,
+"Year" int,
+"Award" text,
+"Category" text,
+"Nominee" text,
+"Result" text,
+PRIMARY KEY ("Musical_ID")
+);
+
+CREATE TABLE "actor" (
+"Actor_ID" int,
+"Name" text,
+"Musical_ID" int,
+"Character" text,
+"Duration" text,
+"age" int,
+PRIMARY KEY ("Actor_ID"),
+FOREIGN KEY ("Musical_ID") REFERENCES "actor"("Actor_ID")
+);
+
+The tables musical and actor are connected using Musical_ID in musical table which is referenced as Actor_ID in actor table. 
+
+Question: List the name of actors in ascending alphabetical order.
+Explanation: Ascending alphabetical order sorts the records in ascending manner based on Name column. Therefore, by sorting all actors names who performed in musicals we get a list of performers sorted according to their name values making it easier for us to read and understand data better.
+SELECT

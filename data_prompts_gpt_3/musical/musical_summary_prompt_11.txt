@@ -1,0 +1,28 @@
+
+CREATE TABLE "musical" (
+"Musical_ID" int,
+"Name" text,
+"Year" int,
+"Award" text,
+"Category" text,
+"Nominee" text,
+"Result" text,
+PRIMARY KEY ("Musical_ID")
+);
+
+CREATE TABLE "actor" (
+"Actor_ID" int,
+"Name" text,
+"Musical_ID" int,
+"Character" text,
+"Duration" text,
+"age" int,
+PRIMARY KEY ("Actor_ID"),
+FOREIGN KEY ("Musical_ID") REFERENCES "actor"("Actor_ID")
+);
+
+The tables musical and actor are connected using Musical_ID in musical table which is referenced as Actor_ID in actor table. 
+
+Question: Show names of actors in descending order of the year their musical is awarded.
+Explanation: Identify unique actor with details of their musical which has been awarded and list it in descending order by the year. The actor table will provide us with a distinct list of actors alongwith their name, character detail and duration whereas when concatenated to headliner using Actor_ID we can fetch information about award winners amongst them based on years they won awards for.
+SELECT

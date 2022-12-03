@@ -1,0 +1,26 @@
+
+PRAGMA foreign_keys = ON;
+
+CREATE TABLE "publication" (
+"Publication_ID" int,
+"Book_ID" int,
+"Publisher" text,
+"Publication_Date" text,
+"Price" real,
+PRIMARY KEY ("Publication_ID"),
+FOREIGN KEY ("Book_ID") REFERENCES "book"("Book_ID")
+);
+
+CREATE TABLE "book" (
+"Book_ID" int,
+"Title" text,
+"Issues" real,
+"Writer" text,
+PRIMARY KEY ("Book_ID")
+);
+
+The tables publication and book are connected using Book_ID.
+
+Question: Please show the most common publication date.
+Explanation: The most common publication date is the one that has been repeated for maximum number of times.
+SELECT

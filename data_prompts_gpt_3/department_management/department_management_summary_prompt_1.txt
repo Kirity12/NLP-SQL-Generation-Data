@@ -1,0 +1,33 @@
+
+CREATE TABLE IF NOT EXISTS "department" (
+"Department_ID" int,
+"Name" text,
+"Creation" text,
+"Ranking" int,
+"Budget_in_Billions" real,
+"Num_Employees" real,
+PRIMARY KEY ("Department_ID")
+);
+
+CREATE TABLE IF NOT EXISTS "head" (
+"head_ID" int,
+"name" text,
+"born_state" text,
+"age" real,
+PRIMARY KEY ("head_ID")
+);
+
+CREATE TABLE IF NOT EXISTS "management" (
+"department_ID" int,
+"head_ID" int,
+"temporary_acting" text,
+PRIMARY KEY ("Department_ID","head_ID"),
+FOREIGN KEY ("Department_ID") REFERENCES `department`("Department_ID"),
+FOREIGN KEY ("head_ID") REFERENCES `head`("head_ID")
+);
+
+The management table is connected to the department table using Department_ID and head table using head_ID.
+
+Question: What are the names of the heads who are born outside the California state?
+Explanation: The names of the heads are fetched from head table and then concatenated with management by using 'head_ID' as a common column. Then only those values will be displayed whose born state is not California which can be found out through WHERE CLAUSE "bornstate" IS NOT NULL AND ("State")="California".
+SELECT

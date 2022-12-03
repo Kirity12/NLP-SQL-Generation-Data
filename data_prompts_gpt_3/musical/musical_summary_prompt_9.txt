@@ -1,0 +1,28 @@
+
+CREATE TABLE "musical" (
+"Musical_ID" int,
+"Name" text,
+"Year" int,
+"Award" text,
+"Category" text,
+"Nominee" text,
+"Result" text,
+PRIMARY KEY ("Musical_ID")
+);
+
+CREATE TABLE "actor" (
+"Actor_ID" int,
+"Name" text,
+"Musical_ID" int,
+"Character" text,
+"Duration" text,
+"age" int,
+PRIMARY KEY ("Actor_ID"),
+FOREIGN KEY ("Musical_ID") REFERENCES "actor"("Actor_ID")
+);
+
+The tables musical and actor are connected using Musical_ID in musical table which is referenced as Actor_ID in actor table. 
+
+Question: Show names of actors and names of musicals they are in.
+Explanation: Identify all the performers who played a role in various musicals and show their names alongside with the name of those musicals. The list of performers can be fetched from the actor table which when concatenated with Musical_ID will provide us details about actors playing roles in multiple muscial plays by showing their respective IDs as well as Names.
+SELECT

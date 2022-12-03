@@ -1,0 +1,2128 @@
+{
+    "concert_singer": {
+        "easy": [
+            {
+                "question": "How many singers do we have?",
+                "query": "SELECT count(*) FROM singer"
+            },
+            {
+                "question": "What is the total number of singers?",
+                "query": "SELECT count(*) FROM singer"
+            },
+            {
+                "question": "What are all distinct countries where singers above age 20 are from?",
+                "query": "SELECT DISTINCT country FROM singer WHERE age  >  20"
+            },
+            {
+                "question": "What are  the different countries with singers above age 20?",
+                "query": "SELECT DISTINCT country FROM singer WHERE age  >  20"
+            }
+        ],
+        "medium": [
+            {
+                "question": "Show name, country, age for all singers ordered by age from the oldest to the youngest.",
+                "query": "SELECT name ,  country ,  age FROM singer ORDER BY age DESC"
+            },
+            {
+                "question": "What are the names, countries, and ages for every singer in descending order of age?",
+                "query": "SELECT name ,  country ,  age FROM singer ORDER BY age DESC"
+            },
+            {
+                "question": "What is the average, minimum, and maximum age of all singers from France?",
+                "query": "SELECT avg(age) ,  min(age) ,  max(age) FROM singer WHERE country  =  'France'"
+            },
+            {
+                "question": "What is the average, minimum, and maximum age for all French singers?",
+                "query": "SELECT avg(age) ,  min(age) ,  max(age) FROM singer WHERE country  =  'France'"
+            },
+            {
+                "question": "Show the name and the release year of the song by the youngest singer.",
+                "query": "SELECT song_name ,  song_release_year FROM singer ORDER BY age LIMIT 1"
+            },
+            {
+                "question": "What are the names and release years for all the songs of the youngest singer?",
+                "query": "SELECT song_name ,  song_release_year FROM singer ORDER BY age LIMIT 1"
+            },
+            {
+                "question": "Show all countries and the number of singers in each country.",
+                "query": "SELECT country ,  count(*) FROM singer GROUP BY country"
+            },
+            {
+                "question": "How many singers are from each country?",
+                "query": "SELECT country ,  count(*) FROM singer GROUP BY country"
+            },
+            {
+                "question": "Show location and name for all stadiums with a capacity between 5000 and 10000.",
+                "query": "SELECT LOCATION ,  name FROM stadium WHERE capacity BETWEEN 5000 AND 10000"
+            },
+            {
+                "question": "What are the locations and names of all stations with capacity between 5000 and 10000?",
+                "query": "SELECT LOCATION ,  name FROM stadium WHERE capacity BETWEEN 5000 AND 10000"
+            },
+            {
+                "question": "What is the maximum capacity and the average of all stadiums ?",
+                "query": "select max(capacity), average from stadium"
+            },
+            {
+                "question": "What is the average and maximum capacities for all stadiums ?",
+                "query": "select avg(capacity) ,  max(capacity) from stadium"
+            },
+            {
+                "question": "What is the name and capacity for the stadium with highest average attendance?",
+                "query": "SELECT name ,  capacity FROM stadium ORDER BY average DESC LIMIT 1"
+            },
+            {
+                "question": "What is the name and capacity for the stadium with the highest average attendance?",
+                "query": "SELECT name ,  capacity FROM stadium ORDER BY average DESC LIMIT 1"
+            },
+            {
+                "question": "How many concerts are there in year 2014 or 2015?",
+                "query": "SELECT count(*) FROM concert WHERE YEAR  =  2014 OR YEAR  =  2015"
+            },
+            {
+                "question": "How many concerts occurred in 2014 or 2015?",
+                "query": "SELECT count(*) FROM concert WHERE YEAR  =  2014 OR YEAR  =  2015"
+            },
+            {
+                "question": "Show the stadium name and the number of concerts in each stadium.",
+                "query": "SELECT T2.name ,  count(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id  =  T2.stadium_id GROUP BY T1.stadium_id"
+            },
+            {
+                "question": "For each stadium, how many concerts play there?",
+                "query": "SELECT T2.name ,  count(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id  =  T2.stadium_id GROUP BY T1.stadium_id"
+            },
+            {
+                "question": "Show the name and theme for all concerts and the number of singers in each concert.",
+                "query": "SELECT T2.concert_name ,  T2.theme ,  count(*) FROM singer_in_concert AS T1 JOIN concert AS T2 ON T1.concert_id  =  T2.concert_id GROUP BY T2.concert_id"
+            },
+            {
+                "question": "What are the names , themes , and number of singers for every concert ?",
+                "query": "select t2.concert_name ,  t2.theme ,  count(*) from singer_in_concert as t1 join concert as t2 on t1.concert_id  =  t2.concert_id group by t2.concert_id"
+            },
+            {
+                "question": "List singer names and number of concerts for each singer.",
+                "query": "SELECT T2.name ,  count(*) FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id  =  T2.singer_id GROUP BY T2.singer_id"
+            },
+            {
+                "question": "What are the names of the singers and number of concerts for each person?",
+                "query": "SELECT T2.name ,  count(*) FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id  =  T2.singer_id GROUP BY T2.singer_id"
+            },
+            {
+                "question": "what is the name and nation of the singer who have a song having 'Hey' in its name?",
+                "query": "SELECT name ,  country FROM singer WHERE song_name LIKE '%Hey%'"
+            },
+            {
+                "question": "What is the name and country of origin of every singer who has a song with the word 'Hey' in its title?",
+                "query": "SELECT name ,  country FROM singer WHERE song_name LIKE '%Hey%'"
+            }
+        ],
+        "hard": [
+            {
+                "question": "List all song names by singers above the average age.",
+                "query": "SELECT song_name FROM singer WHERE age  >  (SELECT avg(age) FROM singer)"
+            },
+            {
+                "question": "What are all the song names by singers who are older than average?",
+                "query": "SELECT song_name FROM singer WHERE age  >  (SELECT avg(age) FROM singer)"
+            },
+            {
+                "question": "Which year has most number of concerts?",
+                "query": "SELECT YEAR FROM concert GROUP BY YEAR ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "What is the year that had the most concerts?",
+                "query": "SELECT YEAR FROM concert GROUP BY YEAR ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "Show the stadium names without any concert.",
+                "query": "SELECT name FROM stadium WHERE stadium_id NOT IN (SELECT stadium_id FROM concert)"
+            },
+            {
+                "question": "What are the names of the stadiums without any concerts?",
+                "query": "SELECT name FROM stadium WHERE stadium_id NOT IN (SELECT stadium_id FROM concert)"
+            },
+            {
+                "question": "Show countries where a singer above age 40 and a singer below 30 are from.",
+                "query": "SELECT country FROM singer WHERE age  >  40 INTERSECT SELECT country FROM singer WHERE age  <  30"
+            },
+            {
+                "question": "Show names for all stadiums except for stadiums having a concert in year 2014.",
+                "query": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id  =  T2.stadium_id WHERE T1.year  =  2014"
+            },
+            {
+                "question": "What are the names of all stadiums that did not have a concert in 2014?",
+                "query": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id  =  T2.stadium_id WHERE T1.year  =  2014"
+            },
+            {
+                "question": "List all singer names in concerts in year 2014.",
+                "query": "SELECT T2.name FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id  =  T2.singer_id JOIN concert AS T3 ON T1.concert_id  =  T3.concert_id WHERE T3.year  =  2014"
+            },
+            {
+                "question": "What are the names of the singers who performed in a concert in 2014?",
+                "query": "SELECT T2.name FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id  =  T2.singer_id JOIN concert AS T3 ON T1.concert_id  =  T3.concert_id WHERE T3.year  =  2014"
+            },
+            {
+                "question": "Find the number of concerts happened in the stadium with the highest capacity .",
+                "query": "select count(*) from concert where stadium_id = (select stadium_id from stadium order by capacity desc limit 1)"
+            },
+            {
+                "question": "What are the number of concerts that occurred in the stadium with the largest capacity ?",
+                "query": "select count(*) from concert where stadium_id = (select stadium_id from stadium order by capacity desc limit 1)"
+            }
+        ],
+        "extra": [
+            {
+                "question": "Show the stadium name and capacity with most number of concerts in year 2014 or after.",
+                "query": "SELECT T2.name ,  T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id  =  T2.stadium_id WHERE T1.year  >=  2014 GROUP BY T2.stadium_id ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "What is the name and capacity of the stadium with the most concerts after 2013 ?",
+                "query": "select t2.name ,  t2.capacity from concert as t1 join stadium as t2 on t1.stadium_id  =  t2.stadium_id where t1.year  >  2013 group by t2.stadium_id order by count(*) desc limit 1"
+            },
+            {
+                "question": "Find the name and location of the stadiums which some concerts happened in the years of both 2014 and 2015.",
+                "query": "SELECT T2.name ,  T2.location FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id  =  T2.stadium_id WHERE T1.Year  =  2014 INTERSECT SELECT T2.name ,  T2.location FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id  =  T2.stadium_id WHERE T1.Year  =  2015"
+            },
+            {
+                "question": "What are the names and locations of the stadiums that had concerts that occurred in both 2014 and 2015?",
+                "query": "SELECT T2.name ,  T2.location FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id  =  T2.stadium_id WHERE T1.Year  =  2014 INTERSECT SELECT T2.name ,  T2.location FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id  =  T2.stadium_id WHERE T1.Year  =  2015"
+            }
+        ]
+    },
+    "pets_1": {
+        "easy": [
+            {
+                "question": "Find the number of pets whose weight is heavier than 10.",
+                "query": "SELECT count(*) FROM pets WHERE weight  >  10"
+            },
+            {
+                "question": "How many pets have a greater weight than 10?",
+                "query": "SELECT count(*) FROM pets WHERE weight  >  10"
+            },
+            {
+                "question": "Find the number of distinct type of pets.",
+                "query": "SELECT count(DISTINCT pettype) FROM pets"
+            },
+            {
+                "question": "How many different types of pet are there?",
+                "query": "SELECT count(DISTINCT pettype) FROM pets"
+            }
+        ],
+        "medium": [
+            {
+                "question": "Find the weight of the youngest dog.",
+                "query": "SELECT weight FROM pets ORDER BY pet_age LIMIT 1"
+            },
+            {
+                "question": "How much does the youngest dog weigh?",
+                "query": "SELECT weight FROM pets ORDER BY pet_age LIMIT 1"
+            },
+            {
+                "question": "Find the maximum weight for each type of pet. List the maximum weight and pet type.",
+                "query": "SELECT max(weight) ,  petType FROM pets GROUP BY petType"
+            },
+            {
+                "question": "List the maximum weight and type for each type of pet.",
+                "query": "SELECT max(weight) ,  petType FROM pets GROUP BY petType"
+            },
+            {
+                "question": "Find number of pets owned by students who are older than 20.",
+                "query": "SELECT count(*) FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid WHERE T1.age  >  20"
+            },
+            {
+                "question": "How many pets are owned by students that have an age greater than 20?",
+                "query": "SELECT count(*) FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid WHERE T1.age  >  20"
+            },
+            {
+                "question": "Find the type and weight of the youngest pet.",
+                "query": "SELECT pettype ,  weight FROM pets ORDER BY pet_age LIMIT 1"
+            },
+            {
+                "question": "What type of pet is the youngest animal, and how much does it weigh?",
+                "query": "SELECT pettype ,  weight FROM pets ORDER BY pet_age LIMIT 1"
+            },
+            {
+                "question": "Find the id and weight of all pets whose age is older than 1.",
+                "query": "SELECT petid ,  weight FROM pets WHERE pet_age  >  1"
+            },
+            {
+                "question": "What is the id and weight of every pet who is older than 1?",
+                "query": "SELECT petid ,  weight FROM pets WHERE pet_age  >  1"
+            },
+            {
+                "question": "Find the average and maximum age for each type of pet.",
+                "query": "SELECT avg(pet_age) ,  max(pet_age) ,  pettype FROM pets GROUP BY pettype"
+            },
+            {
+                "question": "What is the average and maximum age for each pet type?",
+                "query": "SELECT avg(pet_age) ,  max(pet_age) ,  pettype FROM pets GROUP BY pettype"
+            },
+            {
+                "question": "Find the average weight for each pet type.",
+                "query": "SELECT avg(weight) ,  pettype FROM pets GROUP BY pettype"
+            },
+            {
+                "question": "What is the average weight for each type of pet?",
+                "query": "SELECT avg(weight) ,  pettype FROM pets GROUP BY pettype"
+            },
+            {
+                "question": "Find the first name and age of students who have a pet.",
+                "query": "SELECT DISTINCT T1.fname ,  T1.age FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid"
+            },
+            {
+                "question": "What are the different first names and ages of the students who do have pets?",
+                "query": "SELECT DISTINCT T1.fname ,  T1.age FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid"
+            },
+            {
+                "question": "Find the id of the pet owned by student whose last name is \u2018Smith\u2019.",
+                "query": "SELECT T2.petid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid WHERE T1.Lname  =  'Smith'"
+            },
+            {
+                "question": "What is the id of the pet owned by the student whose last name is 'Smith'?",
+                "query": "SELECT T2.petid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid WHERE T1.Lname  =  'Smith'"
+            },
+            {
+                "question": "Find the number of pets for each student who has any pet and student id.",
+                "query": "SELECT count(*) ,  T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid GROUP BY T1.stuid"
+            },
+            {
+                "question": "For students who have pets , how many pets does each student have ? list their ids instead of names .",
+                "query": "select count(*) ,  t1.stuid from student as t1 join has_pet as t2 on t1.stuid  =  t2.stuid group by t1.stuid"
+            },
+            {
+                "question": "Find the first name and gender of student who have more than one pet.",
+                "query": "SELECT T1.fname ,  T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid GROUP BY T1.stuid HAVING count(*)  >  1"
+            },
+            {
+                "question": "What is the first name and gender of the all the students who have more than one pet?",
+                "query": "SELECT T1.fname ,  T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid GROUP BY T1.stuid HAVING count(*)  >  1"
+            }
+        ],
+        "hard": [
+            {
+                "question": "Find the number of dog pets that are raised by female students (with sex F).",
+                "query": "SELECT count(*) FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T2.petid  =  T3.petid WHERE T1.sex  =  'F' AND T3.pettype  =  'dog'"
+            },
+            {
+                "question": "How many dog pets are raised by female students?",
+                "query": "SELECT count(*) FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T2.petid  =  T3.petid WHERE T1.sex  =  'F' AND T3.pettype  =  'dog'"
+            },
+            {
+                "question": "Find the id of students who do not have a cat pet.",
+                "query": "SELECT stuid FROM student EXCEPT SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat'"
+            },
+            {
+                "question": "What are the ids of the students who do not own cats as pets?",
+                "query": "SELECT stuid FROM student EXCEPT SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat'"
+            },
+            {
+                "question": "Find the last name of the student who has a cat that is age 3.",
+                "query": "SELECT T1.lname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pet_age  =  3 AND T3.pettype  =  'cat'"
+            },
+            {
+                "question": "What is the last name of the student who has a cat that is 3 years old?",
+                "query": "SELECT T1.lname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pet_age  =  3 AND T3.pettype  =  'cat'"
+            }
+        ],
+        "extra": [
+            {
+                "question": "Find the first name of students who have cat or dog pet.",
+                "query": "SELECT DISTINCT T1.Fname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat' OR T3.pettype  =  'dog'"
+            },
+            {
+                "question": "What are the first names of every student who has a cat or dog as a pet?",
+                "query": "SELECT DISTINCT T1.Fname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat' OR T3.pettype  =  'dog'"
+            },
+            {
+                "question": "Find the first name of students who have both cat and dog pets .",
+                "query": "select t1.fname from student as t1 join has_pet as t2 on t1.stuid  =  t2.stuid join pets as t3 on t3.petid  =  t2.petid where t3.pettype  =  'cat' intersect select t1.fname from student as t1 join has_pet as t2 on t1.stuid  =  t2.stuid join pets as t3 on t3.petid  =  t2.petid where t3.pettype  =  'dog'"
+            },
+            {
+                "question": "What are the students' first names who have both cats and dogs as pets?",
+                "query": "SELECT T1.Fname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat' INTERSECT SELECT T1.Fname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'dog'"
+            },
+            {
+                "question": "Find the major and age of students who do not have a cat pet.",
+                "query": "SELECT major ,  age FROM student WHERE stuid NOT IN (SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat')"
+            },
+            {
+                "question": "What major is every student who does not own a cat as a pet, and also how old are they?",
+                "query": "SELECT major ,  age FROM student WHERE stuid NOT IN (SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat')"
+            },
+            {
+                "question": "Find the first name and age of students who have a dog but do not have a cat as a pet.",
+                "query": "SELECT T1.fname ,  T1.age FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'dog' AND T1.stuid NOT IN (SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat')"
+            },
+            {
+                "question": "What is the first name of every student who has a dog but does not have a cat?",
+                "query": "SELECT T1.fname ,  T1.age FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'dog' AND T1.stuid NOT IN (SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat')"
+            },
+            {
+                "question": "Find the average age of students who do not have any pet .",
+                "query": "select avg(age) from student where stuid not in (select stuid from has_pet)"
+            },
+            {
+                "question": "What is the average age for all students who do not own any pets ?",
+                "query": "select avg(age) from student where stuid not in (select stuid from has_pet)"
+            }
+        ]
+    },
+    "car_1": {
+        "easy": [
+            {
+                "question": "How many continents are there?",
+                "query": "SELECT count(*) FROM CONTINENTS;"
+            },
+            {
+                "question": "What is the number of continents?",
+                "query": "SELECT count(*) FROM CONTINENTS;"
+            },
+            {
+                "question": "How many countries are listed?",
+                "query": "SELECT count(*) FROM COUNTRIES;"
+            },
+            {
+                "question": "How many countries exist?",
+                "query": "SELECT count(*) FROM COUNTRIES;"
+            },
+            {
+                "question": "What is the average miles per gallon(mpg) of the cars with 4 cylinders?",
+                "query": "SELECT avg(mpg) FROM CARS_DATA WHERE Cylinders  =  4;"
+            },
+            {
+                "question": "What is the average miles per gallon of all the cards with 4 cylinders?",
+                "query": "SELECT avg(mpg) FROM CARS_DATA WHERE Cylinders  =  4;"
+            },
+            {
+                "question": "What is the number of the cars with horsepower more than 150?",
+                "query": "SELECT count(*) FROM CARS_DATA WHERE horsepower  >  150;"
+            },
+            {
+                "question": "What is the number of cars with a horsepower greater than 150?",
+                "query": "SELECT count(*) FROM CARS_DATA WHERE horsepower  >  150;"
+            },
+            {
+                "question": "What is the average horsepower of the cars before 1980?",
+                "query": "SELECT avg(horsepower) FROM CARS_DATA WHERE YEAR  <  1980;"
+            },
+            {
+                "question": "What is the average horsepower for all cars produced before 1980 ?",
+                "query": "select avg(horsepower) from cars_data where year  <  1980;"
+            },
+            {
+                "question": "How many cars have more than 4 cylinders?",
+                "query": "SELECT count(*) FROM CARS_DATA WHERE Cylinders  >  4;"
+            },
+            {
+                "question": "What is the number of cars with more than 4 cylinders?",
+                "query": "SELECT count(*) FROM CARS_DATA WHERE Cylinders  >  4;"
+            },
+            {
+                "question": "how many cars were produced in 1980?",
+                "query": "SELECT count(*) FROM CARS_DATA WHERE YEAR  =  1980;"
+            },
+            {
+                "question": "In 1980, how many cars were made?",
+                "query": "SELECT count(*) FROM CARS_DATA WHERE YEAR  =  1980;"
+            },
+            {
+                "question": "In which years cars were produced weighing no less than 3000 and no more than 4000 ?",
+                "query": "select distinct year from cars_data where weight between 3000 and 4000;"
+            },
+            {
+                "question": "What are the different years in which there were cars produced that weighed less than 4000 and also cars that weighted more than 3000 ?",
+                "query": "select distinct year from cars_data where weight between 3000 and 4000;"
+            },
+            {
+                "question": "How many cars has over 6 cylinders?",
+                "query": "SELECT COUNT(*) FROM CARS_DATA WHERE Cylinders  >  6;"
+            },
+            {
+                "question": "What is the number of carsw ith over 6 cylinders?",
+                "query": "SELECT COUNT(*) FROM CARS_DATA WHERE Cylinders  >  6;"
+            }
+        ],
+        "medium": [
+            {
+                "question": "How many countries does each continent have? List the continent id, continent name and the number of countries.",
+                "query": "SELECT T1.ContId ,  T1.Continent ,  count(*) FROM CONTINENTS AS T1 JOIN COUNTRIES AS T2 ON T1.ContId  =  T2.Continent GROUP BY T1.ContId;"
+            },
+            {
+                "question": "For each continent, list its id, name, and how many countries it has?",
+                "query": "SELECT T1.ContId ,  T1.Continent ,  count(*) FROM CONTINENTS AS T1 JOIN COUNTRIES AS T2 ON T1.ContId  =  T2.Continent GROUP BY T1.ContId;"
+            },
+            {
+                "question": "How many models does each car maker produce? List maker full name, id and the number.",
+                "query": "SELECT T1.FullName ,  T1.Id ,  count(*) FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id  =  T2.Maker GROUP BY T1.Id;"
+            },
+            {
+                "question": "What is the full name of each car maker, along with its id and how many models it produces?",
+                "query": "SELECT T1.FullName ,  T1.Id ,  count(*) FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id  =  T2.Maker GROUP BY T1.Id;"
+            },
+            {
+                "question": "How many car models are produced by each maker ? Only list the count and the maker full name .",
+                "query": "select count(*) ,  t2.fullname from model_list as t1 join car_makers as t2 on t1.maker  =  t2.id group by t2.id;"
+            },
+            {
+                "question": "What is the number of car models that are produced by each maker and what is the id and full name of each maker?",
+                "query": "SELECT Count(*) ,  T2.FullName ,  T2.id FROM MODEL_LIST AS T1 JOIN CAR_MAKERS AS T2 ON T1.Maker  =  T2.Id GROUP BY T2.id;"
+            },
+            {
+                "question": "What is the accelerate of the car make amc hornet sportabout (sw)?",
+                "query": "SELECT T1.Accelerate FROM CARS_DATA AS T1 JOIN CAR_NAMES AS T2 ON T1.Id  =  T2.MakeId WHERE T2.Make  =  'amc hornet sportabout (sw)';"
+            },
+            {
+                "question": "How much does the car accelerate that makes amc hornet sportabout (sw)?",
+                "query": "SELECT T1.Accelerate FROM CARS_DATA AS T1 JOIN CAR_NAMES AS T2 ON T1.Id  =  T2.MakeId WHERE T2.Make  =  'amc hornet sportabout (sw)';"
+            },
+            {
+                "question": "How many car makers are there in france?",
+                "query": "SELECT count(*) FROM CAR_MAKERS AS T1 JOIN COUNTRIES AS T2 ON T1.Country  =  T2.CountryId WHERE T2.CountryName  =  'france';"
+            },
+            {
+                "question": "What is the number of makers of care in France?",
+                "query": "SELECT count(*) FROM CAR_MAKERS AS T1 JOIN COUNTRIES AS T2 ON T1.Country  =  T2.CountryId WHERE T2.CountryName  =  'france';"
+            },
+            {
+                "question": "What is the smallest weight of the car produced with 8 cylinders on 1974 ?",
+                "query": "select min(weight) from cars_data where cylinders  =  8 and year  =  1974"
+            },
+            {
+                "question": "What is the minimum weight of the car with 8 cylinders produced in 1974 ?",
+                "query": "select min(weight) from cars_data where cylinders  =  8 and year  =  1974"
+            },
+            {
+                "question": "What are all the makers and models?",
+                "query": "SELECT Maker ,  Model FROM MODEL_LIST;"
+            },
+            {
+                "question": "What are the makers and models?",
+                "query": "SELECT Maker ,  Model FROM MODEL_LIST;"
+            },
+            {
+                "question": "What are the countries having at least one car maker? List name and id.",
+                "query": "SELECT T1.CountryName ,  T1.CountryId FROM COUNTRIES AS T1 JOIN CAR_MAKERS AS T2 ON T1.CountryId  =  T2.Country GROUP BY T1.CountryId HAVING count(*)  >=  1;"
+            },
+            {
+                "question": "What are the names and ids of all countries with at least one car maker?",
+                "query": "SELECT T1.CountryName ,  T1.CountryId FROM COUNTRIES AS T1 JOIN CAR_MAKERS AS T2 ON T1.CountryId  =  T2.Country GROUP BY T1.CountryId HAVING count(*)  >=  1;"
+            },
+            {
+                "question": "What is the average weight of cars each year?",
+                "query": "SELECT avg(Weight) ,  YEAR FROM CARS_DATA GROUP BY YEAR;"
+            },
+            {
+                "question": "What is the average weight and year for each year?",
+                "query": "SELECT avg(Weight) ,  YEAR FROM CARS_DATA GROUP BY YEAR;"
+            },
+            {
+                "question": "What is the average edispl of the cars of model volvo?",
+                "query": "SELECT avg(T2.edispl) FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId  =  T2.Id WHERE T1.Model  =  'volvo';"
+            },
+            {
+                "question": "What is the average edispl for all volvos?",
+                "query": "SELECT avg(T2.edispl) FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId  =  T2.Id WHERE T1.Model  =  'volvo';"
+            },
+            {
+                "question": "What is the maximum accelerate for different number of cylinders?",
+                "query": "SELECT max(Accelerate) ,  Cylinders FROM CARS_DATA GROUP BY Cylinders;"
+            },
+            {
+                "question": "What is the maximum accelerate for all the different cylinders?",
+                "query": "SELECT max(Accelerate) ,  Cylinders FROM CARS_DATA GROUP BY Cylinders;"
+            },
+            {
+                "question": "How many car models were produced by the maker with full name American Motor Company?",
+                "query": "SELECT count(*) FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id  =  T2.Maker WHERE T1.FullName  =  'American Motor Company';"
+            },
+            {
+                "question": "What is the number of car models created by the car maker American Motor Company?",
+                "query": "SELECT count(*) FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id  =  T2.Maker WHERE T1.FullName  =  'American Motor Company';"
+            },
+            {
+                "question": "Which makers designed more than 3 car models? List full name and the id.",
+                "query": "SELECT T1.FullName ,  T1.Id FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id  =  T2.Maker GROUP BY T1.Id HAVING count(*)  >  3;"
+            },
+            {
+                "question": "What are the names and ids of all makers with more than 3 models?",
+                "query": "SELECT T1.FullName ,  T1.Id FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id  =  T2.Maker GROUP BY T1.Id HAVING count(*)  >  3;"
+            },
+            {
+                "question": "What is the horsepower of the car with the largest accelerate?",
+                "query": "SELECT T1.horsepower FROM CARS_DATA AS T1 ORDER BY T1.accelerate DESC LIMIT 1;"
+            },
+            {
+                "question": "What is the horsepower of the car with the greatest accelerate?",
+                "query": "SELECT T1.horsepower FROM CARS_DATA AS T1 ORDER BY T1.accelerate DESC LIMIT 1;"
+            },
+            {
+                "question": "How many countries has more than 2 car makers ?",
+                "query": "select count(*) from countries as t1 join car_makers as t2 on t1.countryid  =  t2.country group by t1.countryid having count(*)  >  2"
+            },
+            {
+                "question": "What is the number of countries with more than 2 car makers ?",
+                "query": "select count(*) from countries as t1 join car_makers as t2 on t1.countryid  =  t2.country group by t1.countryid having count(*)  >  2"
+            },
+            {
+                "question": "What is the maximum miles per gallon of the car with 8 cylinders or produced before 1980 ?",
+                "query": "select max(mpg) from cars_data where cylinders  =  8 or year  <  1980"
+            },
+            {
+                "question": "What is the maximum mpg of the cars that had 8 cylinders or that were produced before 1980 ?",
+                "query": "select max(mpg) from cars_data where cylinders  =  8 or year  <  1980"
+            }
+        ],
+        "hard": [
+            {
+                "question": "Which model of the car has the minimum horsepower?",
+                "query": "SELECT T1.Model FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId  =  T2.Id ORDER BY T2.horsepower ASC LIMIT 1;"
+            },
+            {
+                "question": "What is the model of the car with the smallest amount of horsepower?",
+                "query": "SELECT T1.Model FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId  =  T2.Id ORDER BY T2.horsepower ASC LIMIT 1;"
+            },
+            {
+                "question": "Which distinct car models are the produced after 1980?",
+                "query": "SELECT DISTINCT T1.model FROM MODEL_LIST AS T1 JOIN CAR_NAMES AS T2 ON T1.model  =  T2.model JOIN CARS_DATA AS T3 ON T2.MakeId  =  T3.id WHERE T3.year  >  1980;"
+            },
+            {
+                "question": "What are the different models for the cards produced after 1980?",
+                "query": "SELECT DISTINCT T1.model FROM MODEL_LIST AS T1 JOIN CAR_NAMES AS T2 ON T1.model  =  T2.model JOIN CARS_DATA AS T3 ON T2.MakeId  =  T3.id WHERE T3.year  >  1980;"
+            },
+            {
+                "question": "How many car makers are there in each continents? List the continent name and the count.",
+                "query": "SELECT T1.Continent ,  count(*) FROM CONTINENTS AS T1 JOIN COUNTRIES AS T2 ON T1.ContId  =  T2.continent JOIN car_makers AS T3 ON T2.CountryId  =  T3.Country GROUP BY T1.Continent;"
+            },
+            {
+                "question": "What is the name of each continent and how many car makers are there in each one?",
+                "query": "SELECT T1.Continent ,  count(*) FROM CONTINENTS AS T1 JOIN COUNTRIES AS T2 ON T1.ContId  =  T2.continent JOIN car_makers AS T3 ON T2.CountryId  =  T3.Country GROUP BY T1.Continent;"
+            },
+            {
+                "question": "How many car models are produced in the usa?",
+                "query": "SELECT count(*) FROM MODEL_LIST AS T1 JOIN CAR_MAKERS AS T2 ON T1.Maker  =  T2.Id JOIN COUNTRIES AS T3 ON T2.Country  =  T3.CountryId WHERE T3.CountryName  =  'usa';"
+            },
+            {
+                "question": "What is the count of the car models produced in the United States?",
+                "query": "SELECT count(*) FROM MODEL_LIST AS T1 JOIN CAR_MAKERS AS T2 ON T1.Maker  =  T2.Id JOIN COUNTRIES AS T3 ON T2.Country  =  T3.CountryId WHERE T3.CountryName  =  'usa';"
+            },
+            {
+                "question": "Which model saves the most gasoline? That is to say, have the maximum miles per gallon.",
+                "query": "SELECT T1.Model FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId  =  T2.Id ORDER BY T2.mpg DESC LIMIT 1;"
+            },
+            {
+                "question": "What is the car model with the highest mpg ?",
+                "query": "select t1.model from car_names as t1 join cars_data as t2 on t1.makeid  =  t2.id order by t2.mpg desc limit 1;"
+            },
+            {
+                "question": "Which model has the most version(make) of cars?",
+                "query": "SELECT Model FROM CAR_NAMES GROUP BY Model ORDER BY count(*) DESC LIMIT 1;"
+            },
+            {
+                "question": "What model has the most different versions?",
+                "query": "SELECT Model FROM CAR_NAMES GROUP BY Model ORDER BY count(*) DESC LIMIT 1;"
+            },
+            {
+                "question": "How many cars have a larger accelerate than the car with the largest horsepower?",
+                "query": "SELECT COUNT(*) FROM CARS_DATA WHERE Accelerate  >  ( SELECT Accelerate FROM CARS_DATA ORDER BY Horsepower DESC LIMIT 1 );"
+            },
+            {
+                "question": "What is the number of cars with a greater accelerate than the one with the most horsepower?",
+                "query": "SELECT COUNT(*) FROM CARS_DATA WHERE Accelerate  >  ( SELECT Accelerate FROM CARS_DATA ORDER BY Horsepower DESC LIMIT 1 );"
+            },
+            {
+                "question": "What are the name of the countries where there is not a single car maker?",
+                "query": "SELECT CountryName FROM countries EXCEPT SELECT T1.CountryName FROM countries AS T1 JOIN CAR_MAKERS AS T2 ON T1.countryId  =  T2.Country;"
+            },
+            {
+                "question": "What are the names of the countries with no car makers?",
+                "query": "SELECT CountryName FROM countries EXCEPT SELECT T1.CountryName FROM countries AS T1 JOIN CAR_MAKERS AS T2 ON T1.countryId  =  T2.Country;"
+            }
+        ],
+        "extra": [
+            {
+                "question": "Find the model of the car whose weight is below the average weight.",
+                "query": "SELECT T1.model FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId  =  T2.Id WHERE T2.Weight  <  (SELECT avg(Weight) FROM CARS_DATA)"
+            },
+            {
+                "question": "What is the model for the car with a weight smaller than the average?",
+                "query": "SELECT T1.model FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId  =  T2.Id WHERE T2.Weight  <  (SELECT avg(Weight) FROM CARS_DATA)"
+            },
+            {
+                "question": "Find the name of the makers that produced some cars in the year of 1970?",
+                "query": "SELECT DISTINCT T1.Maker FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id  =  T2.Maker JOIN CAR_NAMES AS T3 ON T2.model  =  T3.model JOIN CARS_DATA AS T4 ON T3.MakeId  =  T4.id WHERE T4.year  =  '1970';"
+            },
+            {
+                "question": "What is the name of the different car makers who produced a car in 1970?",
+                "query": "SELECT DISTINCT T1.Maker FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id  =  T2.Maker JOIN CAR_NAMES AS T3 ON T2.model  =  T3.model JOIN CARS_DATA AS T4 ON T3.MakeId  =  T4.id WHERE T4.year  =  '1970';"
+            },
+            {
+                "question": "Find the make and production time of the cars that were produced in the earliest year?",
+                "query": "SELECT T2.Make ,  T1.Year FROM CARS_DATA AS T1 JOIN CAR_NAMES AS T2 ON T1.Id  =  T2.MakeId WHERE T1.Year  =  (SELECT min(YEAR) FROM CARS_DATA);"
+            },
+            {
+                "question": "What is the maker of the carr produced in the earliest year and what year was it?",
+                "query": "SELECT T2.Make ,  T1.Year FROM CARS_DATA AS T1 JOIN CAR_NAMES AS T2 ON T1.Id  =  T2.MakeId WHERE T1.Year  =  (SELECT min(YEAR) FROM CARS_DATA);"
+            },
+            {
+                "question": "Which of the countries has the most car makers? List the country name.",
+                "query": "SELECT T2.CountryName FROM CAR_MAKERS AS T1 JOIN COUNTRIES AS T2 ON T1.Country  =  T2.CountryId GROUP BY T1.Country ORDER BY Count(*) DESC LIMIT 1;"
+            },
+            {
+                "question": "What is the name of the country with the most car makers?",
+                "query": "SELECT T2.CountryName FROM CAR_MAKERS AS T1 JOIN COUNTRIES AS T2 ON T1.Country  =  T2.CountryId GROUP BY T1.Country ORDER BY Count(*) DESC LIMIT 1;"
+            },
+            {
+                "question": "Which countries in europe have at least 3 car manufacturers?",
+                "query": "SELECT T1.CountryName FROM COUNTRIES AS T1 JOIN CONTINENTS AS T2 ON T1.Continent  =  T2.ContId JOIN CAR_MAKERS AS T3 ON T1.CountryId  =  T3.Country WHERE T2.Continent  =  'europe' GROUP BY T1.CountryName HAVING count(*)  >=  3;"
+            },
+            {
+                "question": "What are the names of all European countries with at least 3 manufacturers?",
+                "query": "SELECT T1.CountryName FROM COUNTRIES AS T1 JOIN CONTINENTS AS T2 ON T1.Continent  =  T2.ContId JOIN CAR_MAKERS AS T3 ON T1.CountryId  =  T3.Country WHERE T2.Continent  =  'europe' GROUP BY T1.CountryName HAVING count(*)  >=  3;"
+            },
+            {
+                "question": "What is the maximum horsepower and the make of the car models with 3 cylinders?",
+                "query": "SELECT T2.horsepower ,  T1.Make FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId  =  T2.Id WHERE T2.cylinders  =  3 ORDER BY T2.horsepower DESC LIMIT 1;"
+            },
+            {
+                "question": "What is the largest amount of horsepower for the models with 3 cylinders and what make is it?",
+                "query": "SELECT T2.horsepower ,  T1.Make FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId  =  T2.Id WHERE T2.cylinders  =  3 ORDER BY T2.horsepower DESC LIMIT 1;"
+            },
+            {
+                "question": "Which distinctive models are produced by maker with the full name General Motors or weighing more than 3500?",
+                "query": "SELECT DISTINCT T2.Model FROM CAR_NAMES AS T1 JOIN MODEL_LIST AS T2 ON T1.Model  =  T2.Model JOIN CAR_MAKERS AS T3 ON T2.Maker  =  T3.Id JOIN CARS_DATA AS T4 ON T1.MakeId  =  T4.Id WHERE T3.FullName  =  'General Motors' OR T4.weight  >  3500;"
+            },
+            {
+                "question": "What are the different models created by either the car maker General Motors or weighed more than 3500?",
+                "query": "SELECT DISTINCT T2.Model FROM CAR_NAMES AS T1 JOIN MODEL_LIST AS T2 ON T1.Model  =  T2.Model JOIN CAR_MAKERS AS T3 ON T2.Maker  =  T3.Id JOIN CARS_DATA AS T4 ON T1.MakeId  =  T4.Id WHERE T3.FullName  =  'General Motors' OR T4.weight  >  3500;"
+            },
+            {
+                "question": "For model volvo, how many cylinders does the car with the least accelerate have?",
+                "query": "SELECT T1.cylinders FROM CARS_DATA AS T1 JOIN CAR_NAMES AS T2 ON T1.Id  =  T2.MakeId WHERE T2.Model  =  'volvo' ORDER BY T1.accelerate ASC LIMIT 1;"
+            },
+            {
+                "question": "For a volvo model, how many cylinders does the version with least accelerate have?",
+                "query": "SELECT T1.cylinders FROM CARS_DATA AS T1 JOIN CAR_NAMES AS T2 ON T1.Id  =  T2.MakeId WHERE T2.Model  =  'volvo' ORDER BY T1.accelerate ASC LIMIT 1;"
+            },
+            {
+                "question": "For the cars with 4 cylinders, which model has the largest horsepower?",
+                "query": "SELECT T1.Model FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId  =  T2.Id WHERE T2.Cylinders  =  4 ORDER BY T2.horsepower DESC LIMIT 1;"
+            },
+            {
+                "question": "For all of the 4 cylinder cars, which model has the most horsepower?",
+                "query": "SELECT T1.Model FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId  =  T2.Id WHERE T2.Cylinders  =  4 ORDER BY T2.horsepower DESC LIMIT 1;"
+            },
+            {
+                "question": "Among the cars with more than lowest horsepower, which ones do not have more than 3 cylinders? List the car makeid and make name.",
+                "query": "SELECT T2.MakeId ,  T2.Make FROM CARS_DATA AS T1 JOIN CAR_NAMES AS T2 ON T1.Id  =  T2.MakeId WHERE T1.Horsepower  >  (SELECT min(Horsepower) FROM CARS_DATA) AND T1.Cylinders  <=  3;"
+            },
+            {
+                "question": "Among the cars that do not have the minimum horsepower , what are the make ids and names of all those with less than 4 cylinders ?",
+                "query": "select t2.makeid ,  t2.make from cars_data as t1 join car_names as t2 on t1.id  =  t2.makeid where t1.horsepower  >  (select min(horsepower) from cars_data) and t1.cylinders  <  4;"
+            },
+            {
+                "question": "Which models are lighter than 3500 but not built by the 'Ford Motor Company'?",
+                "query": "SELECT DISTINCT T1.model FROM MODEL_LIST AS T1 JOIN CAR_NAMES AS T2 ON T1.Model  =  T2.Model JOIN CARS_DATA AS T3 ON T2.MakeId  =  T3.Id JOIN CAR_MAKERS AS T4 ON T1.Maker  =  T4.Id WHERE T3.weight  <  3500 AND T4.FullName != 'Ford Motor Company';"
+            },
+            {
+                "question": "What are the different models wthat are lighter than 3500 but were not built by the Ford Motor Company?",
+                "query": "SELECT DISTINCT T1.model FROM MODEL_LIST AS T1 JOIN CAR_NAMES AS T2 ON T1.Model  =  T2.Model JOIN CARS_DATA AS T3 ON T2.MakeId  =  T3.Id JOIN CAR_MAKERS AS T4 ON T1.Maker  =  T4.Id WHERE T3.weight  <  3500 AND T4.FullName != 'Ford Motor Company';"
+            },
+            {
+                "question": "Which are the car makers which produce at least 2 models and more than 3 car makers ? List the id and the maker .",
+                "query": "select t1.id ,  t1.maker from car_makers as t1 join model_list as t2 on t1.id  =  t2.maker group by t1.id having count(*)  >=  2 intersect select t1.id ,  t1.maker from car_makers as t1 join model_list as t2 on t1.id  =  t2.maker join car_names as t3 on t2.model  =  t3.model group by t1.id having count(*)  >  3;"
+            },
+            {
+                "question": "What are the ids and makers of all car makers that produce at least 2 models and make more than 3 cars?",
+                "query": "SELECT T1.Id ,  T1.Maker FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id  =  T2.Maker GROUP BY T1.Id HAVING count(*)  >=  2 INTERSECT SELECT T1.Id ,  T1.Maker FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id  =  T2.Maker JOIN CAR_NAMES AS T3 ON T2.model  =  T3.model GROUP BY T1.Id HAVING count(*)  >  3;"
+            },
+            {
+                "question": "What are the id and names of the countries which have more than 3 car makers or produce the 'fiat' model?",
+                "query": "SELECT T1.countryId ,  T1.CountryName FROM Countries AS T1 JOIN CAR_MAKERS AS T2 ON T1.CountryId  =  T2.Country GROUP BY T1.countryId HAVING count(*)  >  3 UNION SELECT T1.countryId ,  T1.CountryName FROM Countries AS T1 JOIN CAR_MAKERS AS T2 ON T1.CountryId  =  T2.Country JOIN MODEL_LIST AS T3 ON T2.Id  =  T3.Maker WHERE T3.Model  =  'fiat';"
+            },
+            {
+                "question": "What are the ids and names of all countries that either have more than 3 car makers or produce fiat model ?",
+                "query": "select t1.countryid ,  t1.countryname from countries as t1 join car_makers as t2 on t1.countryid  =  t2.country group by t1.countryid having count(*)  >  3 union select t1.countryid ,  t1.countryname from countries as t1 join car_makers as t2 on t1.countryid  =  t2.country join model_list as t3 on t2.id  =  t3.maker where t3.model  =  'fiat';"
+            }
+        ]
+    },
+    "flight_2": {
+        "easy": [
+            {
+                "question": "Which country does Airline \"JetBlue Airways\" belong to?",
+                "query": "SELECT Country FROM AIRLINES WHERE Airline  =  \"JetBlue Airways\""
+            },
+            {
+                "question": "What country is Jetblue Airways affiliated with?",
+                "query": "SELECT Country FROM AIRLINES WHERE Airline  =  \"JetBlue Airways\""
+            },
+            {
+                "question": "What is the abbreviation of Airline \"JetBlue Airways\"?",
+                "query": "SELECT Abbreviation FROM AIRLINES WHERE Airline  =  \"JetBlue Airways\""
+            },
+            {
+                "question": "Which abbreviation corresponds to Jetblue Airways?",
+                "query": "SELECT Abbreviation FROM AIRLINES WHERE Airline  =  \"JetBlue Airways\""
+            },
+            {
+                "question": "How many airlines do we have?",
+                "query": "SELECT count(*) FROM AIRLINES"
+            },
+            {
+                "question": "What is the total number of airlines?",
+                "query": "SELECT count(*) FROM AIRLINES"
+            },
+            {
+                "question": "How many airports do we have?",
+                "query": "SELECT count(*) FROM AIRPORTS"
+            },
+            {
+                "question": "Return the number of  airports.",
+                "query": "SELECT count(*) FROM AIRPORTS"
+            },
+            {
+                "question": "How many flights do we have?",
+                "query": "SELECT count(*) FROM FLIGHTS"
+            },
+            {
+                "question": "Return the number of flights.",
+                "query": "SELECT count(*) FROM FLIGHTS"
+            },
+            {
+                "question": "Which airline has abbreviation 'UAL'?",
+                "query": "SELECT Airline FROM AIRLINES WHERE Abbreviation  =  \"UAL\""
+            },
+            {
+                "question": "Give the airline with abbreviation 'UAL'.",
+                "query": "SELECT Airline FROM AIRLINES WHERE Abbreviation  =  \"UAL\""
+            },
+            {
+                "question": "How many airlines are from USA?",
+                "query": "SELECT count(*) FROM AIRLINES WHERE Country  =  \"USA\""
+            },
+            {
+                "question": "Return the number of airlines in the USA.",
+                "query": "SELECT count(*) FROM AIRLINES WHERE Country  =  \"USA\""
+            },
+            {
+                "question": "What is the airport name for airport 'AKO'?",
+                "query": "SELECT AirportName FROM AIRPORTS WHERE AirportCode  =  \"AKO\""
+            },
+            {
+                "question": "Return the name of the airport with code 'AKO'.",
+                "query": "SELECT AirportName FROM AIRPORTS WHERE AirportCode  =  \"AKO\""
+            },
+            {
+                "question": "What are airport names at City 'Aberdeen'?",
+                "query": "SELECT AirportName FROM AIRPORTS WHERE City = \"Aberdeen\""
+            },
+            {
+                "question": "What are the names of airports in Aberdeen?",
+                "query": "SELECT AirportName FROM AIRPORTS WHERE City = \"Aberdeen\""
+            },
+            {
+                "question": "How many flights depart from 'APG'?",
+                "query": "SELECT count(*) FROM FLIGHTS WHERE SourceAirport  =  \"APG\""
+            },
+            {
+                "question": "Count the number of flights departing from 'APG'.",
+                "query": "SELECT count(*) FROM FLIGHTS WHERE SourceAirport  =  \"APG\""
+            },
+            {
+                "question": "How many flights have destination ATO?",
+                "query": "SELECT count(*) FROM FLIGHTS WHERE DestAirport  =  \"ATO\""
+            },
+            {
+                "question": "Count the number of flights into ATO.",
+                "query": "SELECT count(*) FROM FLIGHTS WHERE DestAirport  =  \"ATO\""
+            },
+            {
+                "question": "What are flight numbers of flights departing from Airport \"APG\"?",
+                "query": "SELECT FlightNo FROM FLIGHTS WHERE SourceAirport  =  \"APG\""
+            },
+            {
+                "question": "Give the flight numbers of flights leaving from APG.",
+                "query": "SELECT FlightNo FROM FLIGHTS WHERE SourceAirport  =  \"APG\""
+            },
+            {
+                "question": "What are flight numbers of flights arriving at Airport \"APG\"?",
+                "query": "SELECT FlightNo FROM FLIGHTS WHERE DestAirport  =  \"APG\""
+            },
+            {
+                "question": "Give the flight numbers of flights landing at APG.",
+                "query": "SELECT FlightNo FROM FLIGHTS WHERE DestAirport  =  \"APG\""
+            }
+        ],
+        "medium": [
+            {
+                "question": "List all airline names and their abbreviations in \"USA\".",
+                "query": "SELECT Airline ,  Abbreviation FROM AIRLINES WHERE Country  =  \"USA\""
+            },
+            {
+                "question": "What are the airline names and abbreviations for airlines in the USA?",
+                "query": "SELECT Airline ,  Abbreviation FROM AIRLINES WHERE Country  =  \"USA\""
+            },
+            {
+                "question": "List the airport code and name in the city of Anthony.",
+                "query": "SELECT AirportCode ,  AirportName FROM AIRPORTS WHERE city  =  \"Anthony\""
+            },
+            {
+                "question": "Give the airport code and airport name corresonding to the city Anthony.",
+                "query": "SELECT AirportCode ,  AirportName FROM AIRPORTS WHERE city  =  \"Anthony\""
+            },
+            {
+                "question": "Which city and country is the Alton airport at?",
+                "query": "SELECT City ,  Country FROM AIRPORTS WHERE AirportName  =  \"Alton\""
+            },
+            {
+                "question": "Give the city and country for the Alton airport.",
+                "query": "SELECT City ,  Country FROM AIRPORTS WHERE AirportName  =  \"Alton\""
+            },
+            {
+                "question": "How many flights depart from City Aberdeen?",
+                "query": "SELECT count(*) FROM FLIGHTS AS T1 JOIN AIRPORTS AS T2 ON T1.SourceAirport  =  T2.AirportCode WHERE T2.City  =  \"Aberdeen\""
+            },
+            {
+                "question": "Return the number of flights departing from Aberdeen.",
+                "query": "SELECT count(*) FROM FLIGHTS AS T1 JOIN AIRPORTS AS T2 ON T1.SourceAirport  =  T2.AirportCode WHERE T2.City  =  \"Aberdeen\""
+            },
+            {
+                "question": "How many flights arriving in Aberdeen city?",
+                "query": "SELECT count(*) FROM FLIGHTS AS T1 JOIN AIRPORTS AS T2 ON T1.DestAirport  =  T2.AirportCode WHERE T2.City  =  \"Aberdeen\""
+            },
+            {
+                "question": "Return the number of flights arriving in Aberdeen.",
+                "query": "SELECT count(*) FROM FLIGHTS AS T1 JOIN AIRPORTS AS T2 ON T1.DestAirport  =  T2.AirportCode WHERE T2.City  =  \"Aberdeen\""
+            },
+            {
+                "question": "How many flights does airline 'JetBlue Airways' have?",
+                "query": "SELECT count(*) FROM FLIGHTS AS T1 JOIN AIRLINES AS T2 ON T1.Airline  =  T2.uid WHERE T2.Airline = \"JetBlue Airways\""
+            },
+            {
+                "question": "Give the number of Jetblue Airways flights.",
+                "query": "SELECT count(*) FROM FLIGHTS AS T1 JOIN AIRLINES AS T2 ON T1.Airline  =  T2.uid WHERE T2.Airline = \"JetBlue Airways\""
+            },
+            {
+                "question": "How many 'United Airlines' flights go to Airport 'ASY'?",
+                "query": "SELECT count(*) FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T2.Airline  =  T1.uid WHERE T1.Airline  =  \"United Airlines\" AND T2.DestAirport  =  \"ASY\""
+            },
+            {
+                "question": "Count the number of United Airlines flights arriving in ASY Airport.",
+                "query": "SELECT count(*) FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T2.Airline  =  T1.uid WHERE T1.Airline  =  \"United Airlines\" AND T2.DestAirport  =  \"ASY\""
+            },
+            {
+                "question": "How many 'United Airlines' flights depart from Airport 'AHD'?",
+                "query": "SELECT count(*) FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T2.Airline  =  T1.uid WHERE T1.Airline  =  \"United Airlines\" AND T2.SourceAirport  =  \"AHD\""
+            },
+            {
+                "question": "Return the number of United Airlines flights leaving from AHD Airport.",
+                "query": "SELECT count(*) FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T2.Airline  =  T1.uid WHERE T1.Airline  =  \"United Airlines\" AND T2.SourceAirport  =  \"AHD\""
+            },
+            {
+                "question": "What are airlines that have some flight departing from airport 'AHD'?",
+                "query": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline WHERE T2.SourceAirport  =  \"AHD\""
+            },
+            {
+                "question": "Which airlines have a flight with source airport AHD?",
+                "query": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline WHERE T2.SourceAirport  =  \"AHD\""
+            },
+            {
+                "question": "What are airlines that have flights arriving at airport 'AHD'?",
+                "query": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline WHERE T2.DestAirport  =  \"AHD\""
+            },
+            {
+                "question": "Which airlines have a flight with destination airport AHD?",
+                "query": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline WHERE T2.DestAirport  =  \"AHD\""
+            },
+            {
+                "question": "Find all airlines that have at least 10 flights.",
+                "query": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline GROUP BY T1.Airline HAVING count(*)  >  10"
+            },
+            {
+                "question": "Which airlines have at least 10 flights?",
+                "query": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline GROUP BY T1.Airline HAVING count(*)  >  10"
+            },
+            {
+                "question": "Find all airlines that have fewer than 200 flights.",
+                "query": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline GROUP BY T1.Airline HAVING count(*)  <  200"
+            },
+            {
+                "question": "Which airlines have less than 200 flights?",
+                "query": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline GROUP BY T1.Airline HAVING count(*)  <  200"
+            },
+            {
+                "question": "What are flight numbers of Airline \"United Airlines\"?",
+                "query": "SELECT T1.FlightNo FROM FLIGHTS AS T1 JOIN AIRLINES AS T2 ON T2.uid  =  T1.Airline WHERE T2.Airline  =  \"United Airlines\""
+            },
+            {
+                "question": "Which flight numbers correspond to United Airlines flights?",
+                "query": "SELECT T1.FlightNo FROM FLIGHTS AS T1 JOIN AIRLINES AS T2 ON T2.uid  =  T1.Airline WHERE T2.Airline  =  \"United Airlines\""
+            },
+            {
+                "question": "What are flight numbers of flights departing from City \"Aberdeen \"?",
+                "query": "SELECT T1.FlightNo FROM FLIGHTS AS T1 JOIN AIRPORTS AS T2 ON T1.SourceAirport   =  T2.AirportCode WHERE T2.City  =  \"Aberdeen\""
+            },
+            {
+                "question": "Give the flight numbers of flights leaving from Aberdeen.",
+                "query": "SELECT T1.FlightNo FROM FLIGHTS AS T1 JOIN AIRPORTS AS T2 ON T1.SourceAirport   =  T2.AirportCode WHERE T2.City  =  \"Aberdeen\""
+            },
+            {
+                "question": "What are flight numbers of flights arriving at City \"Aberdeen\"?",
+                "query": "SELECT T1.FlightNo FROM FLIGHTS AS T1 JOIN AIRPORTS AS T2 ON T1.DestAirport   =  T2.AirportCode WHERE T2.City  =  \"Aberdeen\""
+            },
+            {
+                "question": "Give the flight numbers of flights arriving in Aberdeen.",
+                "query": "SELECT T1.FlightNo FROM FLIGHTS AS T1 JOIN AIRPORTS AS T2 ON T1.DestAirport   =  T2.AirportCode WHERE T2.City  =  \"Aberdeen\""
+            }
+        ],
+        "hard": [
+            {
+                "question": "How many flights depart from City 'Aberdeen' and have destination City 'Ashley'?",
+                "query": "SELECT count(*) FROM FLIGHTS AS T1 JOIN AIRPORTS AS T2 ON T1.DestAirport  =  T2.AirportCode JOIN AIRPORTS AS T3 ON T1.SourceAirport  =  T3.AirportCode WHERE T2.City  =  \"Ashley\" AND T3.City  =  \"Aberdeen\""
+            },
+            {
+                "question": "How many flights fly from Aberdeen to Ashley?",
+                "query": "SELECT count(*) FROM FLIGHTS AS T1 JOIN AIRPORTS AS T2 ON T1.DestAirport  =  T2.AirportCode JOIN AIRPORTS AS T3 ON T1.SourceAirport  =  T3.AirportCode WHERE T2.City  =  \"Ashley\" AND T3.City  =  \"Aberdeen\""
+            },
+            {
+                "question": "How many United Airlines flights go to City 'Aberdeen'?",
+                "query": "SELECT count(*) FROM FLIGHTS AS T1 JOIN AIRPORTS AS T2 ON T1.DestAirport  =  T2.AirportCode JOIN AIRLINES AS T3 ON T3.uid  =  T1.Airline WHERE T2.City  =  \"Aberdeen\" AND T3.Airline  =  \"United Airlines\""
+            },
+            {
+                "question": "Count the number of United Airlines flights that arrive in Aberdeen.",
+                "query": "SELECT count(*) FROM FLIGHTS AS T1 JOIN AIRPORTS AS T2 ON T1.DestAirport  =  T2.AirportCode JOIN AIRLINES AS T3 ON T3.uid  =  T1.Airline WHERE T2.City  =  \"Aberdeen\" AND T3.Airline  =  \"United Airlines\""
+            },
+            {
+                "question": "Find the number of flights landing in the city of Aberdeen or Abilene.",
+                "query": "SELECT count(*) FROM Flights AS T1 JOIN Airports AS T2 ON T1.DestAirport  =  T2.AirportCode WHERE T2.city  =  \"Aberdeen\" OR T2.city  =  \"Abilene\""
+            },
+            {
+                "question": "How many flights land in Aberdeen or Abilene?",
+                "query": "SELECT count(*) FROM Flights AS T1 JOIN Airports AS T2 ON T1.DestAirport  =  T2.AirportCode WHERE T2.city  =  \"Aberdeen\" OR T2.city  =  \"Abilene\""
+            },
+            {
+                "question": "Find the name of airports which do not have any flight in and out.",
+                "query": "SELECT AirportName FROM Airports WHERE AirportCode NOT IN (SELECT SourceAirport FROM Flights UNION SELECT DestAirport FROM Flights)"
+            },
+            {
+                "question": "Which airports do not have departing or arriving flights?",
+                "query": "SELECT AirportName FROM Airports WHERE AirportCode NOT IN (SELECT SourceAirport FROM Flights UNION SELECT DestAirport FROM Flights)"
+            }
+        ],
+        "extra": [
+            {
+                "question": "Which city has most number of arriving flights?",
+                "query": "SELECT T1.City FROM AIRPORTS AS T1 JOIN FLIGHTS AS T2 ON T1.AirportCode  =  T2.DestAirport GROUP BY T1.City ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "Which city has the most frequent destination airport?",
+                "query": "SELECT T1.City FROM AIRPORTS AS T1 JOIN FLIGHTS AS T2 ON T1.AirportCode  =  T2.DestAirport GROUP BY T1.City ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "Which city has most number of departing flights?",
+                "query": "SELECT T1.City FROM AIRPORTS AS T1 JOIN FLIGHTS AS T2 ON T1.AirportCode  =  T2.SourceAirport GROUP BY T1.City ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "Which city is the most frequent source airport?",
+                "query": "SELECT T1.City FROM AIRPORTS AS T1 JOIN FLIGHTS AS T2 ON T1.AirportCode  =  T2.SourceAirport GROUP BY T1.City ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "What is the code of airport that has the highest number of flights?",
+                "query": "SELECT T1.AirportCode FROM AIRPORTS AS T1 JOIN FLIGHTS AS T2 ON T1.AirportCode  =  T2.DestAirport OR T1.AirportCode  =  T2.SourceAirport GROUP BY T1.AirportCode ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "What is the airport code of the airport with the most flights?",
+                "query": "SELECT T1.AirportCode FROM AIRPORTS AS T1 JOIN FLIGHTS AS T2 ON T1.AirportCode  =  T2.DestAirport OR T1.AirportCode  =  T2.SourceAirport GROUP BY T1.AirportCode ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "What is the code of airport that has fewest number of flights?",
+                "query": "SELECT T1.AirportCode FROM AIRPORTS AS T1 JOIN FLIGHTS AS T2 ON T1.AirportCode  =  T2.DestAirport OR T1.AirportCode  =  T2.SourceAirport GROUP BY T1.AirportCode ORDER BY count(*) LIMIT 1"
+            },
+            {
+                "question": "Give the code of the airport with the least flights.",
+                "query": "SELECT T1.AirportCode FROM AIRPORTS AS T1 JOIN FLIGHTS AS T2 ON T1.AirportCode  =  T2.DestAirport OR T1.AirportCode  =  T2.SourceAirport GROUP BY T1.AirportCode ORDER BY count(*) LIMIT 1"
+            },
+            {
+                "question": "Which airline has most number of flights?",
+                "query": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline GROUP BY T1.Airline ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "What airline serves the most flights?",
+                "query": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline GROUP BY T1.Airline ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "Find the abbreviation and country of the airline that has fewest number of flights?",
+                "query": "SELECT T1.Abbreviation ,  T1.Country FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline GROUP BY T1.Airline ORDER BY count(*) LIMIT 1"
+            },
+            {
+                "question": "What is the abbreviation of the airilne has the fewest flights and what country is it in?",
+                "query": "SELECT T1.Abbreviation ,  T1.Country FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline GROUP BY T1.Airline ORDER BY count(*) LIMIT 1"
+            },
+            {
+                "question": "Find all airlines that have flights from both airports 'APG' and 'CVO'.",
+                "query": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline WHERE T2.SourceAirport  =  \"APG\" INTERSECT SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline WHERE T2.SourceAirport  =  \"CVO\""
+            },
+            {
+                "question": "Which airlines have departing flights from both APG and CVO airports?",
+                "query": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline WHERE T2.SourceAirport  =  \"APG\" INTERSECT SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline WHERE T2.SourceAirport  =  \"CVO\""
+            },
+            {
+                "question": "Find all airlines that have flights from airport 'CVO' but not from 'APG'.",
+                "query": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline WHERE T2.SourceAirport  =  \"CVO\" EXCEPT SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline WHERE T2.SourceAirport  =  \"APG\""
+            },
+            {
+                "question": "Which airlines have departures from CVO but not from APG airports?",
+                "query": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline WHERE T2.SourceAirport  =  \"CVO\" EXCEPT SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline WHERE T2.SourceAirport  =  \"APG\""
+            }
+        ]
+    },
+    "employee_hire_evaluation": {
+        "easy": [
+            {
+                "question": "How many employees are there?",
+                "query": "SELECT count(*) FROM employee"
+            },
+            {
+                "question": "Count the number of employees",
+                "query": "SELECT count(*) FROM employee"
+            },
+            {
+                "question": "Sort employee names by their age in ascending order.",
+                "query": "SELECT name FROM employee ORDER BY age"
+            },
+            {
+                "question": "List the names of employees and sort in ascending order of age.",
+                "query": "SELECT name FROM employee ORDER BY age"
+            },
+            {
+                "question": "What is total bonus given in all evaluations?",
+                "query": "SELECT sum(bonus) FROM evaluation"
+            },
+            {
+                "question": "Find the total amount of bonus given in all the evaluations.",
+                "query": "SELECT sum(bonus) FROM evaluation"
+            },
+            {
+                "question": "Give me all the information about hiring.",
+                "query": "SELECT * FROM hiring"
+            },
+            {
+                "question": "What is all the information about hiring?",
+                "query": "SELECT * FROM hiring"
+            },
+            {
+                "question": "How many different store locations are there?",
+                "query": "SELECT count(DISTINCT LOCATION) FROM shop"
+            },
+            {
+                "question": "Count the number of distinct store locations.",
+                "query": "SELECT count(DISTINCT LOCATION) FROM shop"
+            }
+        ],
+        "medium": [
+            {
+                "question": "What is the number of employees from each city?",
+                "query": "SELECT count(*) ,  city FROM employee GROUP BY city"
+            },
+            {
+                "question": "Count the number of employees for each city.",
+                "query": "SELECT count(*) ,  city FROM employee GROUP BY city"
+            },
+            {
+                "question": "Which cities do more than one employee under age 30 come from?",
+                "query": "SELECT city FROM employee WHERE age  <  30 GROUP BY city HAVING count(*)  >  1"
+            },
+            {
+                "question": "Find the cities that have more than one employee under age 30.",
+                "query": "SELECT city FROM employee WHERE age  <  30 GROUP BY city HAVING count(*)  >  1"
+            },
+            {
+                "question": "Find the number of shops in each location.",
+                "query": "SELECT count(*) ,  LOCATION FROM shop GROUP BY LOCATION"
+            },
+            {
+                "question": "How many shops are there in each location?",
+                "query": "SELECT count(*) ,  LOCATION FROM shop GROUP BY LOCATION"
+            },
+            {
+                "question": "Find the manager name and district of the shop whose number of products is the largest.",
+                "query": "SELECT manager_name ,  district FROM shop ORDER BY number_products DESC LIMIT 1"
+            },
+            {
+                "question": "What are the manager name and district of the shop that sells the largest number of products?",
+                "query": "SELECT manager_name ,  district FROM shop ORDER BY number_products DESC LIMIT 1"
+            },
+            {
+                "question": "find the minimum and maximum number of products of all stores.",
+                "query": "SELECT min(Number_products) ,  max(Number_products) FROM shop"
+            },
+            {
+                "question": "What are the minimum and maximum number of products across all the shops?",
+                "query": "SELECT min(Number_products) ,  max(Number_products) FROM shop"
+            },
+            {
+                "question": "Return the name, location and district of all shops in descending order of number of products.",
+                "query": "SELECT name ,  LOCATION ,  district FROM shop ORDER BY number_products DESC"
+            },
+            {
+                "question": "Sort all the shops by number products in descending order, and return the name, location and district of each shop.",
+                "query": "SELECT name ,  LOCATION ,  district FROM shop ORDER BY number_products DESC"
+            },
+            {
+                "question": "Find the number of employees hired in each shop; show the shop name as well.",
+                "query": "SELECT count(*) ,  t2.name FROM hiring AS t1 JOIN shop AS t2 ON t1.shop_id  =  t2.shop_id GROUP BY t2.name"
+            },
+            {
+                "question": "For each shop, return the number of employees working there and the name of the shop.",
+                "query": "SELECT count(*) ,  t2.name FROM hiring AS t1 JOIN shop AS t2 ON t1.shop_id  =  t2.shop_id GROUP BY t2.name"
+            }
+        ],
+        "hard": [
+            {
+                "question": "Find the names of stores whose number products is more than the average number of products.",
+                "query": "SELECT name FROM shop WHERE number_products  >  (SELECT avg(number_products) FROM shop)"
+            },
+            {
+                "question": "Which shops' number products is above the average? Give me the shop names.",
+                "query": "SELECT name FROM shop WHERE number_products  >  (SELECT avg(number_products) FROM shop)"
+            },
+            {
+                "question": "Find the name of the employee who got the highest one time bonus.",
+                "query": "SELECT t1.name FROM employee AS t1 JOIN evaluation AS t2 ON t1.Employee_ID  =  t2.Employee_ID ORDER BY t2.bonus DESC LIMIT 1"
+            },
+            {
+                "question": "Which employee received the biggest bonus? Give me the employee name.",
+                "query": "SELECT t1.name FROM employee AS t1 JOIN evaluation AS t2 ON t1.Employee_ID  =  t2.Employee_ID ORDER BY t2.bonus DESC LIMIT 1"
+            },
+            {
+                "question": "Find the names of employees who never won any award in the evaluation.",
+                "query": "SELECT name FROM employee WHERE Employee_ID NOT IN (SELECT Employee_ID FROM evaluation)"
+            },
+            {
+                "question": "What are the names of the employees who never received any evaluation?",
+                "query": "SELECT name FROM employee WHERE Employee_ID NOT IN (SELECT Employee_ID FROM evaluation)"
+            },
+            {
+                "question": "Find the name of the shops that do not hire any employee.",
+                "query": "SELECT name FROM shop WHERE shop_id NOT IN (SELECT shop_id FROM hiring)"
+            },
+            {
+                "question": "Which shops run with no employees? Find the shop names",
+                "query": "SELECT name FROM shop WHERE shop_id NOT IN (SELECT shop_id FROM hiring)"
+            },
+            {
+                "question": "Which district has both stores with less than 3000 products and stores with more than 10000 products?",
+                "query": "SELECT district FROM shop WHERE Number_products  <  3000 INTERSECT SELECT district FROM shop WHERE Number_products  >  10000"
+            },
+            {
+                "question": "Find the districts in which there are both shops selling less than 3000 products and shops selling more than 10000 products.",
+                "query": "SELECT district FROM shop WHERE Number_products  <  3000 INTERSECT SELECT district FROM shop WHERE Number_products  >  10000"
+            }
+        ],
+        "extra": [
+            {
+                "question": "find the name of employee who was awarded the most times in the evaluation.",
+                "query": "SELECT t1.name FROM employee AS t1 JOIN evaluation AS t2 ON t1.Employee_ID  =  t2.Employee_ID GROUP BY t2.Employee_ID ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "Which employee received the most awards in evaluations? Give me the employee name.",
+                "query": "SELECT t1.name FROM employee AS t1 JOIN evaluation AS t2 ON t1.Employee_ID  =  t2.Employee_ID GROUP BY t2.Employee_ID ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "What is the name of the shop that is hiring the largest number of employees?",
+                "query": "SELECT t2.name FROM hiring AS t1 JOIN shop AS t2 ON t1.shop_id  =  t2.shop_id GROUP BY t1.shop_id ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "Which shop has the most employees? Give me the shop name.",
+                "query": "SELECT t2.name FROM hiring AS t1 JOIN shop AS t2 ON t1.shop_id  =  t2.shop_id GROUP BY t1.shop_id ORDER BY count(*) DESC LIMIT 1"
+            }
+        ]
+    },
+    "cre_Doc_Template_Mgt": {
+        "easy": [
+            {
+                "question": "How many documents do we have?",
+                "query": "SELECT count(*) FROM Documents"
+            },
+            {
+                "question": "Count the number of documents.",
+                "query": "SELECT count(*) FROM Documents"
+            },
+            {
+                "question": "How many different templates do all document use?",
+                "query": "SELECT count(DISTINCT template_id) FROM Documents"
+            },
+            {
+                "question": "Count the number of different templates used for documents.",
+                "query": "SELECT count(DISTINCT template_id) FROM Documents"
+            },
+            {
+                "question": "Show ids for all templates that are used by more than one document.",
+                "query": "SELECT template_id FROM Documents GROUP BY template_id HAVING count(*)  >  1"
+            },
+            {
+                "question": "What are the template ids of any templates used in more than a single document?",
+                "query": "SELECT template_id FROM Documents GROUP BY template_id HAVING count(*)  >  1"
+            },
+            {
+                "question": "How many templates do we have?",
+                "query": "SELECT count(*) FROM Templates"
+            },
+            {
+                "question": "Count the number of templates.",
+                "query": "SELECT count(*) FROM Templates"
+            },
+            {
+                "question": "Show all distinct template type codes for all templates.",
+                "query": "SELECT DISTINCT template_type_code FROM Templates"
+            },
+            {
+                "question": "What are the different template type codes?",
+                "query": "SELECT DISTINCT template_type_code FROM Templates"
+            },
+            {
+                "question": "How many templates have template type code CV?",
+                "query": "SELECT count(*) FROM Templates WHERE template_type_code  =  \"CV\""
+            },
+            {
+                "question": "Count the number of templates of the type CV.",
+                "query": "SELECT count(*) FROM Templates WHERE template_type_code  =  \"CV\""
+            },
+            {
+                "question": "Show all template type codes with less than three templates.",
+                "query": "SELECT template_type_code FROM Templates GROUP BY template_type_code HAVING count(*)  <  3"
+            },
+            {
+                "question": "What are the codes of template types that have fewer than 3 templates?",
+                "query": "SELECT template_type_code FROM Templates GROUP BY template_type_code HAVING count(*)  <  3"
+            },
+            {
+                "question": "What is the template type descriptions for template type code \"AD\".",
+                "query": "SELECT template_type_description FROM Ref_template_types WHERE template_type_code  =  \"AD\""
+            },
+            {
+                "question": "Return the template type description of the template type with the code AD.",
+                "query": "SELECT template_type_description FROM Ref_template_types WHERE template_type_code  =  \"AD\""
+            },
+            {
+                "question": "What is the template type code for template type description \"Book\".",
+                "query": "SELECT template_type_code FROM Ref_template_types WHERE template_type_description  =  \"Book\""
+            },
+            {
+                "question": "Return the type code of the template type with the description \"Book\".",
+                "query": "SELECT template_type_code FROM Ref_template_types WHERE template_type_description  =  \"Book\""
+            },
+            {
+                "question": "How many paragraphs in total?",
+                "query": "SELECT count(*) FROM Paragraphs"
+            },
+            {
+                "question": "Count the number of paragraphs.",
+                "query": "SELECT count(*) FROM Paragraphs"
+            },
+            {
+                "question": "List all document ids with at least two paragraphs.",
+                "query": "SELECT document_id FROM Paragraphs GROUP BY document_id HAVING count(*)  >=  2"
+            },
+            {
+                "question": "What are the ids of documents that have 2 or more paragraphs?",
+                "query": "SELECT document_id FROM Paragraphs GROUP BY document_id HAVING count(*)  >=  2"
+            },
+            {
+                "question": "What is the document id with 1 to 2 paragraphs?",
+                "query": "SELECT document_id FROM Paragraphs GROUP BY document_id HAVING count(*) BETWEEN 1 AND 2"
+            },
+            {
+                "question": "Give the ids of documents that have between one and two paragraphs.",
+                "query": "SELECT document_id FROM Paragraphs GROUP BY document_id HAVING count(*) BETWEEN 1 AND 2"
+            }
+        ],
+        "medium": [
+            {
+                "question": "List document IDs, document names, and document descriptions for all documents.",
+                "query": "SELECT document_id ,  document_name ,  document_description FROM Documents"
+            },
+            {
+                "question": "What are the ids, names, and descriptions for all documents?",
+                "query": "SELECT document_id ,  document_name ,  document_description FROM Documents"
+            },
+            {
+                "question": "What is the document name and template id for document with description with the letter 'w' in it?",
+                "query": "SELECT document_name ,  template_id FROM Documents WHERE Document_Description LIKE \"%w%\""
+            },
+            {
+                "question": "Return the names and template ids for documents that contain the letter w in their description.",
+                "query": "SELECT document_name ,  template_id FROM Documents WHERE Document_Description LIKE \"%w%\""
+            },
+            {
+                "question": "What is the document id, template id and description for document named \"Robbin CV\"?",
+                "query": "SELECT document_id ,  template_id ,  Document_Description FROM Documents WHERE document_name  =  \"Robbin CV\""
+            },
+            {
+                "question": "Return the document id, template id, and description for the document with the name Robbin CV.",
+                "query": "SELECT document_id ,  template_id ,  Document_Description FROM Documents WHERE document_name  =  \"Robbin CV\""
+            },
+            {
+                "question": "How many documents are using the template with type code 'PPT'?",
+                "query": "SELECT count(*) FROM Documents AS T1 JOIN Templates AS T2 ON T1.Template_ID  =  T2.Template_ID WHERE T2.Template_Type_Code  =  'PPT'"
+            },
+            {
+                "question": "Count the number of documents that use the PPT template type.",
+                "query": "SELECT count(*) FROM Documents AS T1 JOIN Templates AS T2 ON T1.Template_ID  =  T2.Template_ID WHERE T2.Template_Type_Code  =  'PPT'"
+            },
+            {
+                "question": "Show all template ids and number of documents using each template.",
+                "query": "SELECT template_id ,  count(*) FROM Documents GROUP BY template_id"
+            },
+            {
+                "question": "What are all different template ids used for documents, and how many times were each of them used?",
+                "query": "SELECT template_id ,  count(*) FROM Documents GROUP BY template_id"
+            },
+            {
+                "question": "Show template ids, version numbers, and template type codes for all templates.",
+                "query": "SELECT template_id ,  version_number ,  template_type_code FROM Templates"
+            },
+            {
+                "question": "What are the ids, version numbers, and type codes for each template?",
+                "query": "SELECT template_id ,  version_number ,  template_type_code FROM Templates"
+            },
+            {
+                "question": "What are the ids of templates with template type code PP or PPT?",
+                "query": "SELECT template_id FROM Templates WHERE template_type_code  =  \"PP\" OR template_type_code  =  \"PPT\""
+            },
+            {
+                "question": "Return the ids of templates that have the code PP or PPT.",
+                "query": "SELECT template_id FROM Templates WHERE template_type_code  =  \"PP\" OR template_type_code  =  \"PPT\""
+            },
+            {
+                "question": "What is the version number and template type code for the template with version number later than 5?",
+                "query": "SELECT version_number ,  template_type_code FROM Templates WHERE version_number  >  5"
+            },
+            {
+                "question": "Return the version numbers and template type codes of templates with a version number greater than 5.",
+                "query": "SELECT version_number ,  template_type_code FROM Templates WHERE version_number  >  5"
+            },
+            {
+                "question": "Show all template type codes and number of templates for each.",
+                "query": "SELECT template_type_code ,  count(*) FROM Templates GROUP BY template_type_code"
+            },
+            {
+                "question": "What are the different template type codes, and how many templates correspond to each?",
+                "query": "SELECT template_type_code ,  count(*) FROM Templates GROUP BY template_type_code"
+            },
+            {
+                "question": "What the smallest version number and its template type code?",
+                "query": "SELECT min(Version_Number) ,  template_type_code FROM Templates"
+            },
+            {
+                "question": "Return the lowest version number, along with its corresponding template type code.",
+                "query": "SELECT min(Version_Number) ,  template_type_code FROM Templates"
+            },
+            {
+                "question": "What is the template type code of the template used by document with the name \"Data base\"?",
+                "query": "SELECT T1.template_type_code FROM Templates AS T1 JOIN Documents AS T2 ON T1.template_id  =  T2.template_id WHERE T2.document_name  =  \"Data base\""
+            },
+            {
+                "question": "Return the template type code of the template that is used by a document named Data base.",
+                "query": "SELECT T1.template_type_code FROM Templates AS T1 JOIN Documents AS T2 ON T1.template_id  =  T2.template_id WHERE T2.document_name  =  \"Data base\""
+            },
+            {
+                "question": "Show all document names using templates with template type code BK.",
+                "query": "SELECT T2.document_name FROM Templates AS T1 JOIN Documents AS T2 ON T1.template_id  =  T2.template_id WHERE T1.template_type_code  =  \"BK\""
+            },
+            {
+                "question": "What are the names of documents that use templates with the code BK?",
+                "query": "SELECT T2.document_name FROM Templates AS T1 JOIN Documents AS T2 ON T1.template_id  =  T2.template_id WHERE T1.template_type_code  =  \"BK\""
+            },
+            {
+                "question": "Show all template type codes and the number of documents using each type.",
+                "query": "SELECT T1.template_type_code ,  count(*) FROM Templates AS T1 JOIN Documents AS T2 ON T1.template_id  =  T2.template_id GROUP BY T1.template_type_code"
+            },
+            {
+                "question": "What are the different template type codes, and how many documents use each type?",
+                "query": "SELECT T1.template_type_code ,  count(*) FROM Templates AS T1 JOIN Documents AS T2 ON T1.template_id  =  T2.template_id GROUP BY T1.template_type_code"
+            },
+            {
+                "question": "Show all template type codes and descriptions.",
+                "query": "SELECT template_type_code ,  template_type_description FROM Ref_template_types"
+            },
+            {
+                "question": "What are the type codes and descriptions for all template types?",
+                "query": "SELECT template_type_code ,  template_type_description FROM Ref_template_types"
+            },
+            {
+                "question": "What are the distinct template type descriptions for the templates ever used by any document?",
+                "query": "SELECT DISTINCT T1.template_type_description FROM Ref_template_types AS T1 JOIN Templates AS T2 ON T1.template_type_code  = T2.template_type_code JOIN Documents AS T3 ON T2.Template_ID  =  T3.template_ID"
+            },
+            {
+                "question": "Return the different descriptions for templates that have been used in a document.",
+                "query": "SELECT DISTINCT T1.template_type_description FROM Ref_template_types AS T1 JOIN Templates AS T2 ON T1.template_type_code  = T2.template_type_code JOIN Documents AS T3 ON T2.Template_ID  =  T3.template_ID"
+            },
+            {
+                "question": "What are the template ids with template type description \"Presentation\".",
+                "query": "SELECT T2.template_id FROM Ref_template_types AS T1 JOIN Templates AS T2 ON T1.template_type_code  = T2.template_type_code WHERE T1.template_type_description  =  \"Presentation\""
+            },
+            {
+                "question": "Return the ids corresponding to templates with the description 'Presentation'.",
+                "query": "SELECT T2.template_id FROM Ref_template_types AS T1 JOIN Templates AS T2 ON T1.template_type_code  = T2.template_type_code WHERE T1.template_type_description  =  \"Presentation\""
+            },
+            {
+                "question": "How many paragraphs for the document with name 'Summer Show'?",
+                "query": "SELECT count(*) FROM Paragraphs AS T1 JOIN Documents AS T2 ON T1.document_ID  =  T2.document_ID WHERE T2.document_name  =  'Summer Show'"
+            },
+            {
+                "question": "Count the number of paragraphs in the document named 'Summer Show'.",
+                "query": "SELECT count(*) FROM Paragraphs AS T1 JOIN Documents AS T2 ON T1.document_ID  =  T2.document_ID WHERE T2.document_name  =  'Summer Show'"
+            },
+            {
+                "question": "Show paragraph details for paragraph with text 'Korea ' .",
+                "query": "select other_details from paragraphs where paragraph_text like 'korea'"
+            },
+            {
+                "question": "What are the details for the paragraph that includes the text 'Korea ' ?",
+                "query": "select other_details from paragraphs where paragraph_text like 'korea'"
+            },
+            {
+                "question": "Show all paragraph ids and texts for the document with name 'Welcome to NY'.",
+                "query": "SELECT T1.paragraph_id ,   T1.paragraph_text FROM Paragraphs AS T1 JOIN Documents AS T2 ON T1.document_id  =  T2.document_id WHERE T2.Document_Name  =  'Welcome to NY'"
+            },
+            {
+                "question": "What are the ids and texts of paragraphs in the document titled 'Welcome to NY'?",
+                "query": "SELECT T1.paragraph_id ,   T1.paragraph_text FROM Paragraphs AS T1 JOIN Documents AS T2 ON T1.document_id  =  T2.document_id WHERE T2.Document_Name  =  'Welcome to NY'"
+            },
+            {
+                "question": "Show all paragraph texts for the document \"Customer reviews\".",
+                "query": "SELECT T1.paragraph_text FROM Paragraphs AS T1 JOIN Documents AS T2 ON T1.document_id  =  T2.document_id WHERE T2.document_name  =  \"Customer reviews\""
+            },
+            {
+                "question": "What are the paragraph texts for the document with the name 'Customer reviews'?",
+                "query": "SELECT T1.paragraph_text FROM Paragraphs AS T1 JOIN Documents AS T2 ON T1.document_id  =  T2.document_id WHERE T2.document_name  =  \"Customer reviews\""
+            },
+            {
+                "question": "Show all document ids and the number of paragraphs in each document. Order by document id.",
+                "query": "SELECT document_id ,  count(*) FROM Paragraphs GROUP BY document_id ORDER BY document_id"
+            },
+            {
+                "question": "Return the different document ids along with the number of paragraphs corresponding to each, ordered by id.",
+                "query": "SELECT document_id ,  count(*) FROM Paragraphs GROUP BY document_id ORDER BY document_id"
+            },
+            {
+                "question": "Show all document ids, names and the number of paragraphs in each document.",
+                "query": "SELECT T1.document_id ,  T2.document_name ,  count(*) FROM Paragraphs AS T1 JOIN Documents AS T2 ON T1.document_id  =  T2.document_id GROUP BY T1.document_id"
+            },
+            {
+                "question": "What are the ids and names of each document, as well as the number of paragraphs in each?",
+                "query": "SELECT T1.document_id ,  T2.document_name ,  count(*) FROM Paragraphs AS T1 JOIN Documents AS T2 ON T1.document_id  =  T2.document_id GROUP BY T1.document_id"
+            }
+        ],
+        "extra": [
+            {
+                "question": "What is the id and type code for the template used by the most documents?",
+                "query": "SELECT T1.template_id ,  T2.Template_Type_Code FROM Documents AS T1 JOIN Templates AS T2 ON T1.template_id  =  T2.template_id GROUP BY T1.template_id ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "Return the id and type code of the template that is used for the greatest number of documents.",
+                "query": "SELECT T1.template_id ,  T2.Template_Type_Code FROM Documents AS T1 JOIN Templates AS T2 ON T1.template_id  =  T2.template_id GROUP BY T1.template_id ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "Which template type code is used by most number of documents?",
+                "query": "SELECT T1.template_type_code FROM Templates AS T1 JOIN Documents AS T2 ON T1.template_id  =  T2.template_id GROUP BY T1.template_type_code ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "Return the code of the template type that is most commonly used in documents.",
+                "query": "SELECT T1.template_type_code FROM Templates AS T1 JOIN Documents AS T2 ON T1.template_id  =  T2.template_id GROUP BY T1.template_type_code ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "What is the document id and name with greatest number of paragraphs?",
+                "query": "SELECT T1.document_id ,  T2.document_name FROM Paragraphs AS T1 JOIN Documents AS T2 ON T1.document_id  =  T2.document_id GROUP BY T1.document_id ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "Return the id and name of the document with the most paragraphs.",
+                "query": "SELECT T1.document_id ,  T2.document_name FROM Paragraphs AS T1 JOIN Documents AS T2 ON T1.document_id  =  T2.document_id GROUP BY T1.document_id ORDER BY count(*) DESC LIMIT 1"
+            }
+        ],
+        "hard": [
+            {
+                "question": "Show ids for all templates not used by any document.",
+                "query": "SELECT template_id FROM Templates EXCEPT SELECT template_id FROM Documents"
+            },
+            {
+                "question": "What are the ids for templates that are not used in any documents?",
+                "query": "SELECT template_id FROM Templates EXCEPT SELECT template_id FROM Documents"
+            },
+            {
+                "question": "Which template type code has most number of templates?",
+                "query": "SELECT template_type_code FROM Templates GROUP BY template_type_code ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "Return the type code of the template type that the most templates belong to.",
+                "query": "SELECT template_type_code FROM Templates GROUP BY template_type_code ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "Show all template type codes that are not used by any document.",
+                "query": "SELECT template_type_code FROM Templates EXCEPT SELECT template_type_code FROM Templates AS T1 JOIN Documents AS T2 ON T1.template_id  =  T2.template_id"
+            },
+            {
+                "question": "What are the codes of template types that are not used for any document?",
+                "query": "SELECT template_type_code FROM Templates EXCEPT SELECT template_type_code FROM Templates AS T1 JOIN Documents AS T2 ON T1.template_id  =  T2.template_id"
+            },
+            {
+                "question": "What is the document id with least number of paragraphs?",
+                "query": "SELECT document_id FROM Paragraphs GROUP BY document_id ORDER BY count(*) ASC LIMIT 1"
+            },
+            {
+                "question": "Return the id of the document with the fewest paragraphs.",
+                "query": "SELECT document_id FROM Paragraphs GROUP BY document_id ORDER BY count(*) ASC LIMIT 1"
+            },
+            {
+                "question": "Show the document id with paragraph text 'Brazil' and 'Ireland'.",
+                "query": "SELECT document_id FROM Paragraphs WHERE paragraph_text  =  'Brazil' INTERSECT SELECT document_id FROM Paragraphs WHERE paragraph_text  =  'Ireland'"
+            },
+            {
+                "question": "What are the ids of documents that contain the paragraph text 'Brazil' and 'Ireland'?",
+                "query": "SELECT document_id FROM Paragraphs WHERE paragraph_text  =  'Brazil' INTERSECT SELECT document_id FROM Paragraphs WHERE paragraph_text  =  'Ireland'"
+            }
+        ]
+    },
+    "course_teach": {
+        "easy": [
+            {
+                "question": "How many teachers are there?",
+                "query": "SELECT count(*) FROM teacher"
+            },
+            {
+                "question": "What is the total count of teachers?",
+                "query": "SELECT count(*) FROM teacher"
+            },
+            {
+                "question": "List the names of teachers in ascending order of age.",
+                "query": "SELECT Name FROM teacher ORDER BY Age ASC"
+            },
+            {
+                "question": "What are the names of the teachers ordered by ascending age?",
+                "query": "SELECT Name FROM teacher ORDER BY Age ASC"
+            },
+            {
+                "question": "List the name of teachers whose hometown is not `` Little Lever Urban District '' .",
+                "query": "select name from teacher where hometown != \"little lever urban district\""
+            },
+            {
+                "question": "What are the names of the teachers whose hometown is not `` Little Lever Urban District '' ?",
+                "query": "select name from teacher where hometown != \"little lever urban district\""
+            },
+            {
+                "question": "Show the hometowns shared by at least two teachers.",
+                "query": "SELECT Hometown FROM teacher GROUP BY Hometown HAVING COUNT(*)  >=  2"
+            },
+            {
+                "question": "What are the towns from which at least two teachers come from?",
+                "query": "SELECT Hometown FROM teacher GROUP BY Hometown HAVING COUNT(*)  >=  2"
+            }
+        ],
+        "medium": [
+            {
+                "question": "What are the age and hometown of teachers?",
+                "query": "SELECT Age ,  Hometown FROM teacher"
+            },
+            {
+                "question": "What is the age and hometown of every teacher?",
+                "query": "SELECT Age ,  Hometown FROM teacher"
+            },
+            {
+                "question": "Show the name of teachers aged either 32 or 33?",
+                "query": "SELECT Name FROM teacher WHERE Age  =  32 OR Age  =  33"
+            },
+            {
+                "question": "What are the names of the teachers who are aged either 32 or 33?",
+                "query": "SELECT Name FROM teacher WHERE Age  =  32 OR Age  =  33"
+            },
+            {
+                "question": "What is the hometown of the youngest teacher?",
+                "query": "SELECT Hometown FROM teacher ORDER BY Age ASC LIMIT 1"
+            },
+            {
+                "question": "Where is the youngest teacher from?",
+                "query": "SELECT Hometown FROM teacher ORDER BY Age ASC LIMIT 1"
+            },
+            {
+                "question": "Show different hometown of teachers and the number of teachers from each hometown.",
+                "query": "SELECT Hometown ,  COUNT(*) FROM teacher GROUP BY Hometown"
+            },
+            {
+                "question": "For each hometown, how many teachers are there?",
+                "query": "SELECT Hometown ,  COUNT(*) FROM teacher GROUP BY Hometown"
+            },
+            {
+                "question": "Show names of teachers and the courses they are arranged to teach.",
+                "query": "SELECT T3.Name ,  T2.Course FROM course_arrange AS T1 JOIN course AS T2 ON T1.Course_ID  =  T2.Course_ID JOIN teacher AS T3 ON T1.Teacher_ID  =  T3.Teacher_ID"
+            },
+            {
+                "question": "What is the name of each teacher and what course they teach?",
+                "query": "SELECT T3.Name ,  T2.Course FROM course_arrange AS T1 JOIN course AS T2 ON T1.Course_ID  =  T2.Course_ID JOIN teacher AS T3 ON T1.Teacher_ID  =  T3.Teacher_ID"
+            },
+            {
+                "question": "Show names of teachers and the number of courses they teach.",
+                "query": "SELECT T2.Name ,  COUNT(*) FROM course_arrange AS T1 JOIN teacher AS T2 ON T1.Teacher_ID  =  T2.Teacher_ID GROUP BY T2.Name"
+            },
+            {
+                "question": "What are the names of the teachers and how many courses do they teach?",
+                "query": "SELECT T2.Name ,  COUNT(*) FROM course_arrange AS T1 JOIN teacher AS T2 ON T1.Teacher_ID  =  T2.Teacher_ID GROUP BY T2.Name"
+            },
+            {
+                "question": "Show names of teachers that teach at least two courses.",
+                "query": "SELECT T2.Name FROM course_arrange AS T1 JOIN teacher AS T2 ON T1.Teacher_ID  =  T2.Teacher_ID GROUP BY T2.Name HAVING COUNT(*)  >=  2"
+            },
+            {
+                "question": "What are the names of the teachers who teach at least two courses?",
+                "query": "SELECT T2.Name FROM course_arrange AS T1 JOIN teacher AS T2 ON T1.Teacher_ID  =  T2.Teacher_ID GROUP BY T2.Name HAVING COUNT(*)  >=  2"
+            }
+        ],
+        "hard": [
+            {
+                "question": "List the most common hometown of teachers.",
+                "query": "SELECT Hometown FROM teacher GROUP BY Hometown ORDER BY COUNT(*) DESC LIMIT 1"
+            },
+            {
+                "question": "What is the most commmon hometowns for teachers?",
+                "query": "SELECT Hometown FROM teacher GROUP BY Hometown ORDER BY COUNT(*) DESC LIMIT 1"
+            },
+            {
+                "question": "Show names of teachers and the courses they are arranged to teach in ascending alphabetical order of the teacher's name.",
+                "query": "SELECT T3.Name ,  T2.Course FROM course_arrange AS T1 JOIN course AS T2 ON T1.Course_ID  =  T2.Course_ID JOIN teacher AS T3 ON T1.Teacher_ID  =  T3.Teacher_ID ORDER BY T3.Name"
+            },
+            {
+                "question": "What are the names of the teachers and the courses they teach in ascending alphabetical order by the name of the teacher?",
+                "query": "SELECT T3.Name ,  T2.Course FROM course_arrange AS T1 JOIN course AS T2 ON T1.Course_ID  =  T2.Course_ID JOIN teacher AS T3 ON T1.Teacher_ID  =  T3.Teacher_ID ORDER BY T3.Name"
+            },
+            {
+                "question": "Show the name of the teacher for the math course.",
+                "query": "SELECT T3.Name FROM course_arrange AS T1 JOIN course AS T2 ON T1.Course_ID  =  T2.Course_ID JOIN teacher AS T3 ON T1.Teacher_ID  =  T3.Teacher_ID WHERE T2.Course  =  \"Math\""
+            },
+            {
+                "question": "What are the names of the people who teach math courses?",
+                "query": "SELECT T3.Name FROM course_arrange AS T1 JOIN course AS T2 ON T1.Course_ID  =  T2.Course_ID JOIN teacher AS T3 ON T1.Teacher_ID  =  T3.Teacher_ID WHERE T2.Course  =  \"Math\""
+            },
+            {
+                "question": "List the names of teachers who have not been arranged to teach courses.",
+                "query": "SELECT Name FROM teacher WHERE Teacher_id NOT IN (SELECT Teacher_id FROM course_arrange)"
+            },
+            {
+                "question": "What are the names of the teachers whose courses have not been arranged?",
+                "query": "SELECT Name FROM teacher WHERE Teacher_id NOT IN (SELECT Teacher_id FROM course_arrange)"
+            }
+        ]
+    },
+    "museum_visit": {
+        "easy": [
+            {
+                "question": "How many visitors below age 30 are there?",
+                "query": "SELECT count(*) FROM visitor WHERE age  <  30"
+            },
+            {
+                "question": "What is the average age of the visitors whose membership level is not higher than 4?",
+                "query": "SELECT avg(age) FROM visitor WHERE Level_of_membership  <=  4"
+            },
+            {
+                "question": "Find the average number of staff working for the museums that were open before 2009.",
+                "query": "SELECT avg(num_of_staff) FROM museum WHERE open_year  <  2009"
+            }
+        ],
+        "medium": [
+            {
+                "question": "Find the names of the visitors whose membership level is higher than 4, and order the results by the level from high to low.",
+                "query": "SELECT name FROM visitor WHERE Level_of_membership  >  4 ORDER BY Level_of_membership DESC"
+            },
+            {
+                "question": "Find the name and membership level of the visitors whose membership level is higher than 4, and sort by their age from old to young.",
+                "query": "SELECT name ,  Level_of_membership FROM visitor WHERE Level_of_membership  >  4 ORDER BY age DESC"
+            },
+            {
+                "question": "Find the id and name of the museum that has the most staff members?",
+                "query": "SELECT museum_id ,  name FROM museum ORDER BY num_of_staff DESC LIMIT 1"
+            },
+            {
+                "question": "What are the opening year and staff number of the museum named Plaza Museum?",
+                "query": "SELECT Num_of_Staff ,  Open_Year FROM museum WHERE name  =  'Plaza Museum'"
+            },
+            {
+                "question": "find the id, name and age for visitors who visited some museums more than once.",
+                "query": "SELECT t1.id ,  t1.name ,  t1.age FROM visitor AS t1 JOIN visit AS t2 ON t1.id  =  t2.visitor_id GROUP BY t1.id HAVING count(*)  >  1"
+            },
+            {
+                "question": "What are the average and maximum number of tickets bought in all visits?",
+                "query": "SELECT avg(num_of_ticket) ,  max(num_of_ticket) FROM visit"
+            },
+            {
+                "question": "What is the total ticket expense of the visitors whose membership level is 1?",
+                "query": "SELECT sum(t2.Total_spent) FROM visitor AS t1 JOIN visit AS t2 ON t1.id  =  t2.visitor_id WHERE t1.Level_of_membership  =  1"
+            },
+            {
+                "question": "How many museums were opened after 2013 or before 2008?",
+                "query": "SELECT count(*) FROM museum WHERE open_year  >  2013 OR open_year  <  2008"
+            }
+        ],
+        "hard": [
+            {
+                "question": "find the names of museums which have more staff than the minimum staff number of all museums opened after 2010.",
+                "query": "SELECT name FROM museum WHERE num_of_staff  >  (SELECT min(num_of_staff) FROM museum WHERE open_year  >  2010)"
+            },
+            {
+                "question": "What is the name of the museum that had no visitor yet?",
+                "query": "SELECT name FROM museum WHERE Museum_ID NOT IN (SELECT museum_id FROM visit)"
+            },
+            {
+                "question": "Find the name and age of the visitor who bought the most tickets at once.",
+                "query": "SELECT t1.name ,  t1.age FROM visitor AS t1 JOIN visit AS t2 ON t1.id  =  t2.visitor_id ORDER BY t2.num_of_ticket DESC LIMIT 1"
+            }
+        ],
+        "extra": [
+            {
+                "question": "What are the id, name and membership level of visitors who have spent the largest amount of money in total in all museum tickets?",
+                "query": "SELECT t2.visitor_id ,  t1.name ,  t1.Level_of_membership FROM visitor AS t1 JOIN visit AS t2 ON t1.id  =  t2.visitor_id GROUP BY t2.visitor_id ORDER BY sum(t2.Total_spent) DESC LIMIT 1"
+            },
+            {
+                "question": "What are the id and name of the museum visited most times?",
+                "query": "SELECT t2.Museum_ID ,  t1.name FROM museum AS t1 JOIN visit AS t2 ON t1.Museum_ID  =  t2.Museum_ID GROUP BY t2.Museum_ID ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "What is the name of the visitor who visited both a museum opened before 2009 and a museum opened after 2011?",
+                "query": "SELECT t1.name FROM visitor AS t1 JOIN visit AS t2 ON t1.id  =  t2.visitor_id JOIN museum AS t3 ON t3.Museum_ID  =  t2.Museum_ID WHERE t3.open_year  <  2009 INTERSECT SELECT t1.name FROM visitor AS t1 JOIN visit AS t2 ON t1.id  =  t2.visitor_id JOIN museum AS t3 ON t3.Museum_ID  =  t2.Museum_ID WHERE t3.open_year  >  2011"
+            },
+            {
+                "question": "Find the number of visitors who did not visit any museum opened after 2010.",
+                "query": "SELECT count(*) FROM visitor WHERE id NOT IN (SELECT t2.visitor_id FROM museum AS t1 JOIN visit AS t2 ON t1.Museum_ID  =  t2.Museum_ID WHERE t1.open_year  >  2010)"
+            }
+        ]
+    },
+    "wta_1": {
+        "easy": [
+            {
+                "question": "Find the total number of players.",
+                "query": "SELECT count(*) FROM players"
+            },
+            {
+                "question": "How many players are there?",
+                "query": "SELECT count(*) FROM players"
+            },
+            {
+                "question": "Find the total number of matches.",
+                "query": "SELECT count(*) FROM matches"
+            },
+            {
+                "question": "Count the number of matches.",
+                "query": "SELECT count(*) FROM matches"
+            },
+            {
+                "question": "Find the average rank of winners in all matches.",
+                "query": "SELECT avg(winner_rank) FROM matches"
+            },
+            {
+                "question": "What is the average rank for winners in all matches?",
+                "query": "SELECT avg(winner_rank) FROM matches"
+            },
+            {
+                "question": "Find the highest rank of losers in all matches.",
+                "query": "SELECT min(loser_rank) FROM matches"
+            },
+            {
+                "question": "What is the best rank of losers across all matches?",
+                "query": "SELECT min(loser_rank) FROM matches"
+            },
+            {
+                "question": "find the number of distinct country codes of all players.",
+                "query": "SELECT count(DISTINCT country_code) FROM players"
+            },
+            {
+                "question": "How many distinct countries do players come from?",
+                "query": "SELECT count(DISTINCT country_code) FROM players"
+            },
+            {
+                "question": "Find the number of distinct name of losers.",
+                "query": "SELECT count(DISTINCT loser_name) FROM matches"
+            },
+            {
+                "question": "How many different loser names are there?",
+                "query": "SELECT count(DISTINCT loser_name) FROM matches"
+            },
+            {
+                "question": "Find the name of tourney that has more than 10 matches.",
+                "query": "SELECT tourney_name FROM matches GROUP BY tourney_name HAVING count(*)  >  10"
+            },
+            {
+                "question": "What are the names of tournaments that have more than 10 matches?",
+                "query": "SELECT tourney_name FROM matches GROUP BY tourney_name HAVING count(*)  >  10"
+            },
+            {
+                "question": "Find the codes of countries that have more than 50 players.",
+                "query": "SELECT country_code FROM players GROUP BY country_code HAVING count(*)  >  50"
+            },
+            {
+                "question": "What are the codes of countries with more than 50 players?",
+                "query": "SELECT country_code FROM players GROUP BY country_code HAVING count(*)  >  50"
+            }
+        ],
+        "medium": [
+            {
+                "question": "List the first name and birth date of all players from the country with code USA.",
+                "query": "SELECT first_name ,  birth_date FROM players WHERE country_code  =  'USA'"
+            },
+            {
+                "question": "What are the first names and birth dates of players from the USA?",
+                "query": "SELECT first_name ,  birth_date FROM players WHERE country_code  =  'USA'"
+            },
+            {
+                "question": "Find the average age of losers and winners of all matches.",
+                "query": "SELECT avg(loser_age) ,  avg(winner_age) FROM matches"
+            },
+            {
+                "question": "What are the average ages of losers and winners across matches?",
+                "query": "SELECT avg(loser_age) ,  avg(winner_age) FROM matches"
+            },
+            {
+                "question": "List the number of all matches who played in years of 2013 or 2016.",
+                "query": "SELECT count(*) FROM matches WHERE YEAR  =  2013 OR YEAR  =  2016"
+            },
+            {
+                "question": "How many matches were played in 2013 or 2016?",
+                "query": "SELECT count(*) FROM matches WHERE YEAR  =  2013 OR YEAR  =  2016"
+            },
+            {
+                "question": "Find the first name and country code of the oldest player.",
+                "query": "SELECT first_name ,  country_code FROM players ORDER BY birth_date LIMIT 1"
+            },
+            {
+                "question": "What is the first name and country code of the oldest player?",
+                "query": "SELECT first_name ,  country_code FROM players ORDER BY birth_date LIMIT 1"
+            },
+            {
+                "question": "List the first and last name of all players in the order of birth date.",
+                "query": "SELECT first_name ,  last_name FROM players ORDER BY birth_date"
+            },
+            {
+                "question": "What are the full names of all players, sorted by birth date?",
+                "query": "SELECT first_name ,  last_name FROM players ORDER BY birth_date"
+            },
+            {
+                "question": "List the first and last name of all players who are left / L hand in the order of birth date.",
+                "query": "SELECT first_name ,  last_name FROM players WHERE hand  =  'L' ORDER BY birth_date"
+            },
+            {
+                "question": "What are the full names of all left handed players, in order of birth date?",
+                "query": "SELECT first_name ,  last_name FROM players WHERE hand  =  'L' ORDER BY birth_date"
+            },
+            {
+                "question": "find the names of loser and winner who played in the match with greatest number of minutes.",
+                "query": "SELECT winner_name ,  loser_name FROM matches ORDER BY minutes DESC LIMIT 1"
+            },
+            {
+                "question": "What are the names of the winner and loser who played in the longest match?",
+                "query": "SELECT winner_name ,  loser_name FROM matches ORDER BY minutes DESC LIMIT 1"
+            },
+            {
+                "question": "Find the average ranking for each player and their first name.",
+                "query": "SELECT avg(ranking) ,  T1.first_name FROM players AS T1 JOIN rankings AS T2 ON T1.player_id  =  T2.player_id GROUP BY T1.first_name"
+            },
+            {
+                "question": "What are the first names of all players, and their average rankings?",
+                "query": "SELECT avg(ranking) ,  T1.first_name FROM players AS T1 JOIN rankings AS T2 ON T1.player_id  =  T2.player_id GROUP BY T1.first_name"
+            },
+            {
+                "question": "Find the total ranking points for each player and their first name.",
+                "query": "SELECT sum(ranking_points) ,  T1.first_name FROM players AS T1 JOIN rankings AS T2 ON T1.player_id  =  T2.player_id GROUP BY T1.first_name"
+            },
+            {
+                "question": "What are the first names of all players, and their total ranking points?",
+                "query": "SELECT sum(ranking_points) ,  T1.first_name FROM players AS T1 JOIN rankings AS T2 ON T1.player_id  =  T2.player_id GROUP BY T1.first_name"
+            },
+            {
+                "question": "find the number of players for each country.",
+                "query": "SELECT count(*) ,  country_code FROM players GROUP BY country_code"
+            },
+            {
+                "question": "How many players are from each country?",
+                "query": "SELECT count(*) ,  country_code FROM players GROUP BY country_code"
+            },
+            {
+                "question": "Find the total number of tours for each ranking date.",
+                "query": "SELECT sum(tours) ,  ranking_date FROM rankings GROUP BY ranking_date"
+            },
+            {
+                "question": "How many total tours were there for each ranking date?",
+                "query": "SELECT sum(tours) ,  ranking_date FROM rankings GROUP BY ranking_date"
+            },
+            {
+                "question": "Find the number of matches happened in each year.",
+                "query": "SELECT count(*) ,  YEAR FROM matches GROUP BY YEAR"
+            },
+            {
+                "question": "How many matches were played in each year?",
+                "query": "SELECT count(*) ,  YEAR FROM matches GROUP BY YEAR"
+            },
+            {
+                "question": "Find the name and rank of the 3 youngest winners across all matches.",
+                "query": "SELECT DISTINCT winner_name ,  winner_rank FROM matches ORDER BY winner_age LIMIT 3"
+            },
+            {
+                "question": "What are the names and ranks of the three youngest winners across all matches?",
+                "query": "SELECT DISTINCT winner_name ,  winner_rank FROM matches ORDER BY winner_age LIMIT 3"
+            },
+            {
+                "question": "How many different winners both participated in the WTA Championships and were left handed?",
+                "query": "SELECT count(DISTINCT winner_name) FROM matches WHERE tourney_name  =  'WTA Championships' AND winner_hand  =  'L'"
+            },
+            {
+                "question": "Find the number of left handed winners who participated in the WTA Championships.",
+                "query": "SELECT count(DISTINCT winner_name) FROM matches WHERE tourney_name  =  'WTA Championships' AND winner_hand  =  'L'"
+            },
+            {
+                "question": "Find the number of players for each hand type.",
+                "query": "SELECT count(*) ,  hand FROM players GROUP BY hand"
+            },
+            {
+                "question": "How many players are there for each hand type?",
+                "query": "SELECT count(*) ,  hand FROM players GROUP BY hand"
+            }
+        ],
+        "hard": [
+            {
+                "question": "List the names of all winners who played in both 2013 and 2016.",
+                "query": "SELECT winner_name FROM matches WHERE YEAR  =  2013 INTERSECT SELECT winner_name FROM matches WHERE YEAR  =  2016"
+            },
+            {
+                "question": "What are the names of players who won in both 2013 and 2016?",
+                "query": "SELECT winner_name FROM matches WHERE YEAR  =  2013 INTERSECT SELECT winner_name FROM matches WHERE YEAR  =  2016"
+            },
+            {
+                "question": "Find the first name and country code of the player who did the most number of tours.",
+                "query": "SELECT T1.country_code ,  T1.first_name FROM players AS T1 JOIN rankings AS T2 ON T1.player_id  =  T2.player_id ORDER BY T2.tours DESC LIMIT 1"
+            },
+            {
+                "question": "What is the first name and country code of the player with the most tours?",
+                "query": "SELECT T1.country_code ,  T1.first_name FROM players AS T1 JOIN rankings AS T2 ON T1.player_id  =  T2.player_id ORDER BY T2.tours DESC LIMIT 1"
+            },
+            {
+                "question": "Find the year that has the most number of matches.",
+                "query": "SELECT YEAR FROM matches GROUP BY YEAR ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "Which year had the most matches?",
+                "query": "SELECT YEAR FROM matches GROUP BY YEAR ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "Find the name and rank points of the winner who won the most times.",
+                "query": "SELECT winner_name ,  winner_rank_points FROM matches GROUP BY winner_name ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "What is the name of the winner who has won the most matches, and how many rank points does this player have?",
+                "query": "SELECT winner_name ,  winner_rank_points FROM matches GROUP BY winner_name ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "Find the name of the winner who has the highest rank points and participated in the Australian Open tourney.",
+                "query": "SELECT winner_name FROM matches WHERE tourney_name  =  'Australian Open' ORDER BY winner_rank_points DESC LIMIT 1"
+            },
+            {
+                "question": "What is the name of the winner with the most rank points who participated in the Australian Open tournament?",
+                "query": "SELECT winner_name FROM matches WHERE tourney_name  =  'Australian Open' ORDER BY winner_rank_points DESC LIMIT 1"
+            },
+            {
+                "question": "find the code of the country where has the greatest number of players.",
+                "query": "SELECT country_code FROM players GROUP BY country_code ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "What is the code of the country with the most players?",
+                "query": "SELECT country_code FROM players GROUP BY country_code ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "Find the first name, country code and birth date of the winner who has the highest rank points in all matches.",
+                "query": "SELECT T1.first_name ,  T1.country_code ,  T1.birth_date FROM players AS T1 JOIN matches AS T2 ON T1.player_id  =  T2.winner_id ORDER BY T2.winner_rank_points DESC LIMIT 1"
+            },
+            {
+                "question": "What is the first name, country code, and birth date of the player with the most winner rank points across all matches?",
+                "query": "SELECT T1.first_name ,  T1.country_code ,  T1.birth_date FROM players AS T1 JOIN matches AS T2 ON T1.player_id  =  T2.winner_id ORDER BY T2.winner_rank_points DESC LIMIT 1"
+            }
+        ],
+        "extra": [
+            {
+                "question": "What are the country code and first name of the players who won in both tourney WTA Championships and Australian Open?",
+                "query": "SELECT T1.country_code ,  T1.first_name FROM players AS T1 JOIN matches AS T2 ON T1.player_id  =  T2.winner_id WHERE T2.tourney_name  =  'WTA Championships' INTERSECT SELECT T1.country_code ,  T1.first_name FROM players AS T1 JOIN matches AS T2 ON T1.player_id  =  T2.winner_id WHERE T2.tourney_name  =  'Australian Open'"
+            },
+            {
+                "question": "What are the first names and country codes for players who won both the WTA Championships and the Australian Open?",
+                "query": "SELECT T1.country_code ,  T1.first_name FROM players AS T1 JOIN matches AS T2 ON T1.player_id  =  T2.winner_id WHERE T2.tourney_name  =  'WTA Championships' INTERSECT SELECT T1.country_code ,  T1.first_name FROM players AS T1 JOIN matches AS T2 ON T1.player_id  =  T2.winner_id WHERE T2.tourney_name  =  'Australian Open'"
+            }
+        ]
+    },
+    "battle_death": {
+        "easy": [
+            {
+                "question": "How many ships ended up being 'Captured'?",
+                "query": "SELECT count(*) FROM ship WHERE disposition_of_ship  =  'Captured'"
+            },
+            {
+                "question": "What is the average number of injuries caused each time?",
+                "query": "SELECT avg(injured) FROM death"
+            },
+            {
+                "question": "How many different results are there for the battles?",
+                "query": "SELECT count(DISTINCT RESULT) FROM battle"
+            }
+        ],
+        "medium": [
+            {
+                "question": "List the name and tonnage ordered by in descending alphaetical order for the names.",
+                "query": "SELECT name ,  tonnage FROM ship ORDER BY name DESC"
+            },
+            {
+                "question": "List the name, date and result of each battle.",
+                "query": "SELECT name ,  date FROM battle"
+            },
+            {
+                "question": "What is maximum and minimum death toll caused each time?",
+                "query": "SELECT max(killed) ,  min(killed) FROM death"
+            },
+            {
+                "question": "What are the death and injury situations caused by the ship with tonnage 't'?",
+                "query": "SELECT T1.killed ,  T1.injured FROM death AS T1 JOIN ship AS t2 ON T1.caused_by_ship_id  =  T2.id WHERE T2.tonnage  =  't'"
+            },
+            {
+                "question": "What are the name and results of the battles when the bulgarian commander is not 'Boril'",
+                "query": "SELECT name ,  RESULT FROM battle WHERE bulgarian_commander != 'Boril'"
+            },
+            {
+                "question": "What are the different ids and names of the battles that lost any 'Brig' type shipes?",
+                "query": "SELECT DISTINCT T1.id ,  T1.name FROM battle AS T1 JOIN ship AS T2 ON T1.id  =  T2.lost_in_battle WHERE T2.ship_type  =  'Brig'"
+            },
+            {
+                "question": "What are the distinct battle names which are between bulgarian commander 'Kaloyan' and latin commander 'Baldwin I'?",
+                "query": "SELECT name FROM battle WHERE bulgarian_commander  =  'Kaloyan' AND latin_commander  =  'Baldwin I'"
+            },
+            {
+                "question": "What are the notes of the death events which has substring 'East'?",
+                "query": "SELECT note FROM death WHERE note LIKE '%East%'"
+            }
+        ],
+        "hard": [
+            {
+                "question": "What are the ids and names of the battles that led to more than 10 people killed in total.",
+                "query": "SELECT T1.id ,  T1.name FROM battle AS T1 JOIN ship AS T2 ON T1.id  =  T2.lost_in_battle JOIN death AS T3 ON T2.id  =  T3.caused_by_ship_id GROUP BY T1.id HAVING sum(T3.killed)  >  10"
+            }
+        ],
+        "extra": [
+            {
+                "question": "What is the ship id and name that caused most total injuries?",
+                "query": "SELECT T2.id ,  T2.name FROM death AS T1 JOIN ship AS t2 ON T1.caused_by_ship_id  =  T2.id GROUP BY T2.id ORDER BY count(*) DESC LIMIT 1"
+            },
+            {
+                "question": "How many battles did not lose any ship with tonnage '225'?",
+                "query": "SELECT count(*) FROM battle WHERE id NOT IN ( SELECT lost_in_battle FROM ship WHERE tonnage  =  '225' );"
+            },
+            {
+                "question": "List the name and date the battle that has lost the ship named 'Lettice' and the ship named 'HMS Atalanta'",
+                "query": "SELECT T1.name ,  T1.date FROM battle AS T1 JOIN ship AS T2 ON T1.id  =  T2.lost_in_battle WHERE T2.name  =  'Lettice' INTERSECT SELECT T1.name ,  T1.date FROM battle AS T1 JOIN ship AS T2 ON T1.id  =  T2.lost_in_battle WHERE T2.name  =  'HMS Atalanta'"
+            },
+            {
+                "question": "Show names, results and bulgarian commanders of the battles with no ships lost in the 'English Channel'.",
+                "query": "SELECT name ,  RESULT ,  bulgarian_commander FROM battle EXCEPT SELECT T1.name ,  T1.result ,  T1.bulgarian_commander FROM battle AS T1 JOIN ship AS T2 ON T1.id  =  T2.lost_in_battle WHERE T2.location  =  'English Channel'"
+            }
+        ]
+    }
+}

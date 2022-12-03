@@ -1,0 +1,33 @@
+
+CREATE TABLE IF NOT EXISTS "department" (
+"Department_ID" int,
+"Name" text,
+"Creation" text,
+"Ranking" int,
+"Budget_in_Billions" real,
+"Num_Employees" real,
+PRIMARY KEY ("Department_ID")
+);
+
+CREATE TABLE IF NOT EXISTS "head" (
+"head_ID" int,
+"name" text,
+"born_state" text,
+"age" real,
+PRIMARY KEY ("head_ID")
+);
+
+CREATE TABLE IF NOT EXISTS "management" (
+"department_ID" int,
+"head_ID" int,
+"temporary_acting" text,
+PRIMARY KEY ("Department_ID","head_ID"),
+FOREIGN KEY ("Department_ID") REFERENCES `department`("Department_ID"),
+FOREIGN KEY ("head_ID") REFERENCES `head`("head_ID")
+);
+
+The management table is connected to the department table using Department_ID and head table using head_ID.
+
+Question: What are the distinct creation years of the departments managed by a secretary born in state 'Alabama'?
+Explanation: We need to find the year of creation of those departments which are managed by a secretary born in state 'Alabama'. The values can be fetched from department table and management tables using Department_ID.
+SELECT
