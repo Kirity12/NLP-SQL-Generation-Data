@@ -1,0 +1,41 @@
+
+PRAGMA foreign_keys = ON;
+
+CREATE TABLE "museum" (
+"Museum_ID" int,
+"Name" text,
+"Num_of_Staff" int,
+"Open_Year" text,
+PRIMARY KEY ("Museum_ID")
+);
+
+CREATE TABLE "visitor" (
+"ID" int,
+"Name" text,
+"Level_of_membership" int,
+"Age" int,
+PRIMARY KEY ("ID")
+);
+
+CREATE TABLE "visit" (
+"Museum_ID" int,
+"visitor_ID" text,
+"Num_of_Ticket" int,
+"Total_spent" real,
+PRIMARY KEY ("Museum_ID","visitor_ID"),
+FOREIGN KEY ("Museum_ID") REFERENCES `museum`("Museum_ID"),
+FOREIGN KEY ("visitor_ID") REFERENCES `visitor`("ID")
+);
+
+--Using valid SQLite, answer the following questions for the tables provided above.
+Easy: How many visitors below age 30 are there?
+SELECT count(*) FROM visitor WHERE age  <  30
+
+Medium: Find the names of the visitors whose membership level is higher than 4, and order the results by the level from high to low.
+SELECT name FROM visitor WHERE Level_of_membership  >  4 ORDER BY Level_of_membership DESC
+
+Hard: find the names of museums which have more staff than the minimum staff number of all museums opened after 2010.
+SELECT name FROM museum WHERE num_of_staff  >  (SELECT min(num_of_staff) FROM museum WHERE open_year  >  2010)
+
+Question: What is the name of the visitor who visited both a museum opened before 2009 and a museum opened after 2011?
+SELECT

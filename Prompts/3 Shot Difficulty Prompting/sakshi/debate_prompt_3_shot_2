@@ -1,0 +1,43 @@
+
+
+CREATE TABLE "people" (
+"People_ID" int,
+"District" text,
+"Name" text,
+"Party" text,
+"Age" int,
+PRIMARY KEY ("People_ID")
+);
+
+CREATE TABLE "debate" (
+"Debate_ID" int,
+"Date" text,
+"Venue" text,
+"Num_of_Audience" int,
+PRIMARY KEY ("Debate_ID")
+);
+
+CREATE TABLE "debate_people" (
+"Debate_ID" int,
+"Affirmative" int,
+"Negative" int,
+"If_Affirmative_Win" bool,
+PRIMARY KEY ("Debate_ID","Affirmative","Negative"),
+FOREIGN KEY ("Debate_ID") REFERENCES `debate`("Debate_ID"),
+FOREIGN KEY ("Affirmative") REFERENCES `people`("People_ID"),
+FOREIGN KEY ("Negative") REFERENCES `people`("People_ID")
+);
+
+-- Using valid SQLite, answer the following questions for the tables provided above.
+--How many debates are there?
+SELECT count(*) FROM debate
+
+--List the venues of debates in ascending order of the number of audience.
+SELECT Venue FROM debate ORDER BY Num_of_Audience ASC
+
+--What are the date and venue of each debate?
+SELECT Date ,  Venue FROM debate
+
+--List the dates of debates with number of audience bigger than 150
+SELECT
+

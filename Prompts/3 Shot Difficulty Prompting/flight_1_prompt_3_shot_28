@@ -1,0 +1,45 @@
+-- drop table flight cascade constraints;
+-- drop table aircraft cascade constraints;
+-- drop table employee cascade constraints;
+-- drop table certificate cascade constraints;
+
+create table flight(
+	flno number(4,0) primary key,
+	origin varchar2(20),
+	destination varchar2(20),
+	distance number(6,0),
+	departure_date date,
+	arrival_date date,
+	price number(7,2),
+    aid number(9,0),
+    foreign key("aid") references `aircraft`("aid"));
+
+create table aircraft(
+	aid number(9,0) primary key,
+	name varchar2(30),
+	distance number(6,0));
+
+create table employee(
+	eid number(9,0) primary key,
+	name varchar2(30),
+	salary number(10,2));
+
+create table certificate(
+	eid number(9,0),
+	aid number(9,0),
+	primary key(eid,aid),
+	foreign key("eid") references `employee`("eid"),
+	foreign key("aid") references `aircraft`("aid")); 
+
+--Using valid SQLite, answer the following questions for the tables provided above.
+Easy: How many aircrafts exist in the database?
+SELECT count(*) FROM Aircraft
+
+Medium: How many aircrafts have distance between 1000 and 5000?
+SELECT count(*) FROM Aircraft WHERE distance BETWEEN 1000 AND 5000
+
+Hard: What is the aircraft name for the flight with number 99
+SELECT T2.name FROM Flight AS T1 JOIN Aircraft AS T2 ON T1.aid  =  T2.aid WHERE T1.flno  =  99
+
+Question: Show all flight numbers with aircraft Airbus A340-300.
+SELECT

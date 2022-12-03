@@ -1,0 +1,38 @@
+SELECT count(DISTINCT allergy) FROM Allergy_type
+SELECT Date FROM debate WHERE Num_of_Audience > 150
+SELECT T3.Name ,  T2.Date ,  T2.Venue FROM debate_people AS T1 JOIN debate AS T2 ON T1.Debate_ID  =  T2.Debate_ID JOIN people AS T3 ON T1.Negative  =  T3.People_ID
+SELECT Zip_code FROM county WHERE County_name = "Howard"
+SELECT T2.Comptroller FROM election AS T1 JOIN party AS T2 ON T1.Party  =  T2.Party_ID WHERE T1.District  =  1 OR T1.District  =  2
+SELECT Farm_ID, Total_Horses FROM farm ORDER BY Total_Horses ASC
+SELECT Census_Ranking FROM city WHERE Status !=  \"Village\"
+SELECT Train_Num, Location FROM train, railway WHERE train.Railway_ID = railway.Railway_ID
+SELECT Location ,  COUNT(*) FROM railway GROUP BY Location
+SELECT name FROM stadium WHERE Capacity = (SELECT MAX(Capacity) FROM stadium)
+SELECT t1.name FROM manufacturer AS t1 JOIN furniture_manufacte AS t2 ON t1.manufacturer_id  =  t2.manufacturer_id JOIN furniture AS t3 ON t2.furniture_id  =  t3.furniture_id WHERE t3.num_of_component  <  6 OR t3.num_of_component  >  10
+SELECT Range, COUNT(*) AS num_mountains FROM mountain GROUP BY Range ORDER BY num_mountains DESC LIMIT 1
+SELECT property_name FROM Properties WHERE property_type_code  =  \"HSE\" OR property_type_code  =  \"APT\" AND room_count  >  1
+SELECT T1.characteristic_name FROM characteristics AS T1 JOIN product_characteristics AS T2 ON T1.characteristic_id  =  T2.characteristic_id JOIN products AS T3 ON T2.product_id  =  T3.product_id WHERE T3.product_name  =  \"sesame\" AND T1.characteristic_type_code  =  \"Grade\"
+SELECT t1.product_name FROM products AS t1 JOIN ref_product_categories AS t2 ON t1.product_category_code  =  t2.product_category_code WHERE t1.color_code  =  \"white\" AND t2.unit_of_measure  !=  \"Handful\"
+SELECT T1.name, T1.num_employees FROM department AS T1 JOIN management AS T2 ON T1.department_id  =  T2.department_id JOIN head AS T3 ON T2.head_id  =  T3.head_id WHERE T2.temporary_acting  =  'Yes'
+SELECT DISTINCT T1.born_state FROM management AS T2 JOIN head AS T1 ON T1.head_id  =  T2.head_id JOIN department AS T3 ON T3.department_id  =  T2.department_id WHERE T3.name  =  'Treasury' OR T3.name  =  'Homeland Security'
+SELECT T1.first_name, T1.last_name, T2.course_name FROM people AS T1 JOIN student_course_registrations AS T2 ON T1.person_id = T2.student_id ORDER BY T2.registration_date DESC LIMIT 1
+SELECT T1.course_id, COUNT(T2.student_id), T1.course_name FROM courses AS T1 JOIN student_course_registrations AS T2 ON T1.course_id = T2.course_id GROUP BY T1.course_id
+SELECT student_id FROM student_course_registrations WHERE course_id = 'statistics' ORDER BY registration_date
+SELECT Publication_Date, COUNT(Publication_Date) AS Count FROM publication GROUP BY Publication_Date ORDER BY Count DESC LIMIT 1
+SELECT DISTINCT Publisher FROM publication WHERE Price > 10000000 OR Price < 5000000
+SELECT Name FROM musical WHERE Musical_ID IN (SELECT Musical_ID FROM actor GROUP BY Musical_ID HAVING COUNT(*) >= 3)
+SELECT T1.Nominee FROM musical AS T1 JOIN musical AS T2 ON T1.Nominee = T2.Nominee WHERE T1.Award = \"Tony Award\" AND T2.Award = \"Drama Desk Award\"
+SELECT catalog_entry_name FROM catalog_contents WHERE catalog_entry_id  IN (SELECT catalog_entry_id FROM catalog_contents_additional_attributes GROUP BY catalog_entry_id ORDER BY count(*) DESC LIMIT 1)
+SELECT catalog_level_name FROM Catalog_Structure JOIN Catalog_Contents ON Catalog_Structure.catalog_level_number  =  Catalog_Contents.catalog_level_number WHERE Catalog_Contents.price_in_dollars  =  (SELECT min(price_in_dollars) FROM Catalog_Contents)
+SELECT catalog_entry_name FROM Catalog_Contents WHERE catalog_level_number  =  8
+SELECT T1.flno FROM Flight AS T1 JOIN Aircraft AS T2 ON T1.aid  =  T2.aid WHERE T2.name  =  'Airbus A340-300'
+SELECT name ,  count(*) FROM Aircraft JOIN Flight ON Aircraft.aid = Flight.aid GROUP BY name
+SELECT T1.name FROM Aircraft AS T1 JOIN Certificate AS T2 ON T1.aid  =  T2.aid GROUP BY T1.name HAVING count(T2.eid)  =  (SELECT min(count(T3.eid)) FROM Aircraft AS T4 JOIN Certificate AS T3 ON T4.aid  =  T3.aid GROUP BY T4.name)
+SELECT T2.id ,  T2.name FROM death AS T1 JOIN ship AS t2 ON T1.caused_by_ship_id  =  T2.id GROUP BY T2.id ORDER BY count(*) DESC LIMIT 1
+SELECT name, result, bulgarian_commander FROM battle WHERE id NOT IN ( SELECT lost_in_battle FROM ship WHERE location = 'English Channel' )
+SELECT winner_name, country_code FROM matches WHERE tourney_name  =  'WTA Championships' INTERSECT SELECT winner_name, country_code FROM matches WHERE tourney_name  =  'Australian Open'
+SELECT hand, count(*) FROM players GROUP BY hand
+SELECT count(*) FROM matches WHERE winner_hand  =  'L' INTERSECT SELECT winner_name FROM matches WHERE tourney_name  =  'WTA Championships'
+SELECT ranking_date, sum(tours) FROM rankings GROUP BY ranking_date
+SELECT id, name, Level_of_membership FROM visitor INNER JOIN visit ON visitor.id = visit.visitor_id GROUP BY id HAVING SUM(Total_spent) = (SELECT SUM(Total_spent) FROM visit GROUP BY visitor_id ORDER BY SUM(Total_spent) DESC LIMIT 1
+

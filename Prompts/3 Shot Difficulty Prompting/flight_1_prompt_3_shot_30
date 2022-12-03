@@ -1,0 +1,45 @@
+-- drop table flight cascade constraints;
+-- drop table aircraft cascade constraints;
+-- drop table employee cascade constraints;
+-- drop table certificate cascade constraints;
+
+create table flight(
+	flno number(4,0) primary key,
+	origin varchar2(20),
+	destination varchar2(20),
+	distance number(6,0),
+	departure_date date,
+	arrival_date date,
+	price number(7,2),
+    aid number(9,0),
+    foreign key("aid") references `aircraft`("aid"));
+
+create table aircraft(
+	aid number(9,0) primary key,
+	name varchar2(30),
+	distance number(6,0));
+
+create table employee(
+	eid number(9,0) primary key,
+	name varchar2(30),
+	salary number(10,2));
+
+create table certificate(
+	eid number(9,0),
+	aid number(9,0),
+	primary key(eid,aid),
+	foreign key("eid") references `employee`("eid"),
+	foreign key("aid") references `aircraft`("aid")); 
+
+--Using valid SQLite, answer the following questions for the tables provided above.
+Question: What is the count of distinct employees with certificates?
+Answer: SELECT count(DISTINCT eid) FROM Certificate
+
+Question: Show ids for all employees who don't have a certificate.
+Answer: SELECT eid FROM Employee EXCEPT SELECT eid FROM Certificate
+
+Question: Show names for all employees who have certificate of Boeing 737-800.
+Answer: SELECT T1.name FROM Employee AS T1 JOIN Certificate AS T2 ON T1.eid  =  T2.eid JOIN Aircraft AS T3 ON T3.aid  =  T2.aid WHERE T3.name  =  \"Boeing 737-800\"
+
+Question: Show the name of aircraft which fewest people have its certificate.
+Answer: SELECT
