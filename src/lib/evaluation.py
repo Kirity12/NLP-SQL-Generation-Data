@@ -26,6 +26,11 @@ import sqlite3
 import traceback
 import argparse
 
+from pathlib import Path
+PARENT_DIR = Path(__file__, '../').resolve()
+sys.path.append(str(PARENT_DIR))
+sys.path.append(str(Path(__file__, '../..').resolve()))
+
 from process_sql import tokenize, get_schema, get_tables_with_alias, Schema, get_sql
 
 # Flag to disable value evaluation
@@ -475,14 +480,30 @@ def print_scores(scores, etype):
             print("{:20} {:<20.3f} {:<20.3f} {:<20.3f} {:<20.3f} {:<20.3f}".format(type_, *this_scores))
 
 
-def evaluate(gold, predict, db_dir, etype, kmaps):
-    with open(gold) as f:
-        glist = [l.strip().split('\t') for l in f.readlines() if len(l.strip()) > 0]
+def evaluate(etype, kmaps):
+    parent = str(Path(__file__, '../../..').resolve())
+    db_dir = parent+r'\data\database'
+    plist = []
+    glist = []
+    technique = '2'
+    path = parent+r'\predicted_prompt'+technique
+    for file in os.listdir(path):
+        if 'example' in file:
+            file_path = os.path.join(path, file)
+            with open(file_path) as f:
+                data = json.load(f)
 
-    with open(predict) as f:
-        plist = [l.strip().split('\t') for l in f.readlines() if len(l.strip()) > 0]
-    # plist = [("select max(Share),min(Share) from performance where Type != 'terminal'", "orchestra")]
-    # glist = [("SELECT max(SHARE) ,  min(SHARE) FROM performance WHERE TYPE != 'Live final'", "orchestra")]
+            given_query = ' '. join(data['given_query'].split('\n'))
+            predicted_query = ' '. join(data['predicted_answer'].split('\n'))
+            if ';' in predicted_query:
+                predicted_query = predicted_query[: predicted_query.index(';')]
+
+            glist.append((given_query, data['databases']))
+
+            plist.append((predicted_query, data['databases']))
+
+    
+
     evaluator = Evaluator()
 
     levels = ['easy', 'medium', 'hard', 'extra', 'all']
@@ -847,22 +868,26 @@ def build_foreign_key_map_from_json(table):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--gold', dest='gold', type=str)
-    parser.add_argument('--pred', dest='pred', type=str)
-    parser.add_argument('--db', dest='db', type=str)
-    parser.add_argument('--table', dest='table', type=str)
-    parser.add_argument('--etype', dest='etype', type=str)
-    args = parser.parse_args()
+    # parser = argparse.ArgumentParser()
+    # parser.add_argument('--gold', dest='gold', type=str)
+    # parser.add_argument('--pred', dest='pred', type=str)
+    # parser.add_argument('--db', dest='db', type=str)
+    # parser.add_argument('--table', dest='table', type=str)
+    # parser.add_argument('--etype', dest='etype', type=str)
+    # args = parser.parse_args()
 
-    gold = args.gold
-    pred = args.pred
-    db_dir = args.db
-    table = args.table
-    etype = args.etype
+    # gold = args.gold
+    # pred = args.pred
+    # db_dir = args.db
+    # table = args.table
+    # etype = args.etype
+
+
+    table = r'data\tables.json'
+    etype ='all'
 
     assert etype in ["all", "exec", "match"], "Unknown evaluation method"
 
     kmaps = build_foreign_key_map_from_json(table)
 
-    evaluate(gold, pred, db_dir, etype, kmaps)
+    evaluate( etype, kmaps)

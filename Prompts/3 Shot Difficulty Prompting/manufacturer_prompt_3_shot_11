@@ -1,0 +1,43 @@
+
+PRAGMA foreign_keys = ON;
+
+CREATE TABLE "manufacturer" (
+    "Manufacturer_ID" int,
+    "Open_Year" real,
+    "Name" text,
+    "Num_of_Factories" int,
+    "Num_of_Shops" int,
+    PRIMARY KEY ("Manufacturer_ID")
+);
+
+
+CREATE TABLE "furniture" (
+    "Furniture_ID" int,
+    "Name" text,
+    "Num_of_Component" int,
+    "Market_Rate" real,
+    PRIMARY KEY ("Furniture_ID")
+);
+
+CREATE TABLE "furniture_manufacte" (
+    "Manufacturer_ID" int,
+    "Furniture_ID" int,
+    "Price_in_Dollar" real,
+    PRIMARY KEY ("Manufacturer_ID","Furniture_ID"),
+    FOREIGN KEY ("Manufacturer_ID") REFERENCES `manufacturer`("Manufacturer_ID"),
+    FOREIGN KEY ("Furniture_ID") REFERENCES `furniture`("Furniture_ID")
+);
+
+-- Using valid SQLite, answer the following questions for the tables provided above.
+--How many furniture components are there in total?
+SELECT sum(num_of_component) FROM furniture
+
+--Find the names of furnitures whose prices are lower than the highest price.
+SELECT t1.name FROM furniture AS t1 JOIN furniture_manufacte AS t2 ON t1.Furniture_ID  =  t2.Furniture_ID WHERE t2.Price_in_Dollar  <  (SELECT max(Price_in_Dollar) FROM furniture_manufacte)
+
+--Find the number of funiture types produced by each manufacturer as well as the company names.
+SELECT count(*) ,  t1.name FROM manufacturer AS t1 JOIN furniture_manufacte AS t2 ON t1.manufacturer_id  =  t2.manufacturer_id GROUP BY t1.manufacturer_id
+
+--Find the name of the company that produces both furnitures with less than 6 components and furnitures with more than 10 components.
+SELECT
+        

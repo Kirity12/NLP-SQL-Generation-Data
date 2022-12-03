@@ -1,0 +1,44 @@
+PRAGMA foreign_keys=ON;
+BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS "department" (
+"Department_ID" int,
+"Name" text,
+"Creation" text,
+"Ranking" int,
+"Budget_in_Billions" real,
+"Num_Employees" real,
+PRIMARY KEY ("Department_ID")
+);
+
+CREATE TABLE IF NOT EXISTS "head" (
+"head_ID" int,
+"name" text,
+"born_state" text,
+"age" real,
+PRIMARY KEY ("head_ID")
+);
+
+CREATE TABLE IF NOT EXISTS "management" (
+"department_ID" int,
+"head_ID" int,
+"temporary_acting" text,
+PRIMARY KEY ("Department_ID","head_ID"),
+FOREIGN KEY ("Department_ID") REFERENCES `department`("Department_ID"),
+FOREIGN KEY ("head_ID") REFERENCES `head`("head_ID")
+);
+
+COMMIT;
+
+--Using valid SQLite, answer the following questions for the tables provided above.
+Easy: How many heads of the departments are older than 56 ?
+SELECT count(*) FROM head WHERE age  >  56
+
+Medium: What is the average number of employees of the departments whose rank is between 10 and 15?
+SELECT avg(num_employees) FROM department WHERE ranking BETWEEN 10 AND 15
+
+Hard: What are the distinct creation years of the departments managed by a secretary born in state 'Alabama'?
+SELECT DISTINCT T1.creation FROM department AS T1 JOIN management AS T2 ON T1.department_id  =  T2.department_id JOIN head AS T3 ON T2.head_id  =  T3.head_id WHERE T3.born_state  =  'Alabama'
+
+Question: Show the name and number of employees for the departments managed by heads whose temporary acting value is 'Yes'?
+SELECT
+

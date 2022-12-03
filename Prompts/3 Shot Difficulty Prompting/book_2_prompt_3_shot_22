@@ -1,0 +1,32 @@
+PRAGMA foreign_keys = ON;
+
+CREATE TABLE "publication" (
+"Publication_ID" int,
+"Book_ID" int,
+"Publisher" text,
+"Publication_Date" text,
+"Price" real,
+PRIMARY KEY ("Publication_ID"),
+FOREIGN KEY ("Book_ID") REFERENCES "book"("Book_ID")
+);
+
+CREATE TABLE "book" (
+"Book_ID" int,
+"Title" text,
+"Issues" real,
+"Writer" text,
+PRIMARY KEY ("Book_ID")
+);
+
+--Using valid SQLite, answer the following questions for the tables provided above.
+Easy: How many books are there?
+SELECT count(*) FROM book
+
+Medium: What are the dates of publications in descending order of price?
+SELECT Publication_Date FROM publication ORDER BY Price DESC
+
+Hard: Show the titles of books in descending order of publication price.
+SELECT T1.Title FROM book AS T1 JOIN publication AS T2 ON T1.Book_ID  =  T2.Book_ID ORDER BY T2.Price DESC
+
+Question: Show the publishers that have publications with price higher than 10000000 and publications with price lower than 5000000.
+SELECT

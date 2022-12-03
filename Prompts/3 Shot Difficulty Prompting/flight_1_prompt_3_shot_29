@@ -1,0 +1,45 @@
+-- drop table flight cascade constraints;
+-- drop table aircraft cascade constraints;
+-- drop table employee cascade constraints;
+-- drop table certificate cascade constraints;
+
+create table flight(
+	flno number(4,0) primary key,
+	origin varchar2(20),
+	destination varchar2(20),
+	distance number(6,0),
+	departure_date date,
+	arrival_date date,
+	price number(7,2),
+    aid number(9,0),
+    foreign key("aid") references `aircraft`("aid"));
+
+create table aircraft(
+	aid number(9,0) primary key,
+	name varchar2(30),
+	distance number(6,0));
+
+create table employee(
+	eid number(9,0) primary key,
+	name varchar2(30),
+	salary number(10,2));
+
+create table certificate(
+	eid number(9,0),
+	aid number(9,0),
+	primary key(eid,aid),
+	foreign key("eid") references `employee`("eid"),
+	foreign key("aid") references `aircraft`("aid")); 
+
+--Using valid SQLite, answer the following questions for the tables provided above.
+Easy: Show name and distance for all aircrafts.
+SELECT name ,  distance FROM Aircraft
+
+Medium: What is the id and name of the aircraft that can cover the maximum distance?
+SELECT aid ,  name FROM Aircraft ORDER BY distance DESC LIMIT 1
+
+Hard: Which origin has most number of flights?
+SELECT origin FROM Flight GROUP BY origin ORDER BY count(*) DESC LIMIT 1
+
+Question: Show aircraft names and number of flights for each aircraft.
+SELECT

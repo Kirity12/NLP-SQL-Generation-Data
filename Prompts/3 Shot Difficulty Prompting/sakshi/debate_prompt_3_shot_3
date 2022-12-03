@@ -1,0 +1,40 @@
+CREATE TABLE "people" (
+"People_ID" int,
+"District" text,
+"Name" text,
+"Party" text,
+"Age" int,
+PRIMARY KEY ("People_ID")
+);
+
+CREATE TABLE "debate" (
+"Debate_ID" int,
+"Date" text,
+"Venue" text,
+"Num_of_Audience" int,
+PRIMARY KEY ("Debate_ID")
+);
+
+CREATE TABLE "debate_people" (
+"Debate_ID" int,
+"Affirmative" int,
+"Negative" int,
+"If_Affirmative_Win" bool,
+PRIMARY KEY ("Debate_ID","Affirmative","Negative"),
+FOREIGN KEY ("Debate_ID") REFERENCES `debate`("Debate_ID"),
+FOREIGN KEY ("Affirmative") REFERENCES `people`("People_ID"),
+FOREIGN KEY ("Negative") REFERENCES `people`("People_ID")
+);
+
+-- Using valid SQLite, answer the following questions for the tables provided above.
+--Show the names of people aged either 35 or 36.
+SELECT Name FROM  people WHERE Age  =  35 OR Age  =  36
+
+--What is the party of the youngest people?
+SELECT Party FROM people ORDER BY Age ASC LIMIT 1
+
+--Show the names of people, and dates and venues of debates they are on the affirmative side.
+SELECT T3.Name ,  T2.Date ,  T2.Venue FROM debate_people AS T1 JOIN debate AS T2 ON T1.Debate_ID  =  T2.Debate_ID JOIN people AS T3 ON T1.Affirmative  =  T3.People_ID
+
+--Show the names of people, and dates and venues of debates they are on the affirmative side.
+SELECT

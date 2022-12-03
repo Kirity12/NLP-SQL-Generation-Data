@@ -1,0 +1,36 @@
+PRAGMA foreign_keys = ON;
+
+CREATE TABLE "mountain" (
+"Mountain_ID" int,
+"Name" text,
+"Height" real,
+"Prominence" real,
+"Range" text,
+"Country" text,
+PRIMARY KEY ("Mountain_ID")
+);
+
+CREATE TABLE "climber" (
+"Climber_ID" int,
+"Name" text,
+"Country" text,
+"Time" text,
+"Points" real,
+"Mountain_ID" int,
+PRIMARY KEY ("Climber_ID"),
+FOREIGN KEY ("Mountain_ID") REFERENCES "mountain"("Mountain_ID")
+);
+
+--Using valid SQLite, answer the following questions for the tables provided above.
+Question: List the names of climbers in descending order of points.
+Answer: SELECT Name FROM climber ORDER BY Points DESC
+
+Question: List the distinct ranges of the mountains with the top 3 prominence.
+Answer: SELECT DISTINCT Range FROM mountain ORDER BY Prominence DESC LIMIT 3
+
+Question: Which countries have more than one mountain?
+Answer: SELECT Country FROM mountain GROUP BY Country HAVING COUNT(*)  >  1
+
+Question: Show the range that has the most number of mountains.
+Answer: 
+

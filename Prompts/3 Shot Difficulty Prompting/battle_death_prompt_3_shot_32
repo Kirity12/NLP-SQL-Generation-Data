@@ -1,0 +1,48 @@
+PRAGMA foreign_keys = ON;
+
+CREATE TABLE "battle" (
+"id" int,
+"name" text,
+"date" text,
+"bulgarian_commander" text,
+"latin_commander" text,
+"result" text,
+primary key("id")
+);
+
+CREATE TABLE "ship" (
+"lost_in_battle" int,
+"id" int,
+"name" text,
+"tonnage" text,
+"ship_type" text,
+"location" text,
+"disposition_of_ship" text,
+primary key("id"),
+foreign key (`lost_in_battle`) references `battle`("id") 
+);
+
+
+CREATE TABLE "death" (
+"caused_by_ship_id" int,
+"id" int,
+"note" text,
+"killed" int,
+"injured" int,
+primary key("id"),
+foreign key ("caused_by_ship_id") references `ship`("id") 
+);
+
+
+--Using valid SQLite, answer the following questions for the tables provided above.
+Easy: List the name and tonnage ordered by in descending alphaetical order for the names.
+SELECT name ,  tonnage FROM ship ORDER BY name DESC
+
+Medium: How many battles did not lose any ship with tonnage '225'?
+SELECT count(*) FROM battle WHERE id NOT IN ( SELECT lost_in_battle FROM ship WHERE tonnage  =  '225' );
+
+Hard: What is the ship id and name that caused most total injuries?
+SELECT T2.id ,  T2.name FROM death AS T1 JOIN ship AS t2 ON T1.caused_by_ship_id  =  T2.id GROUP BY T2.id ORDER BY count(*) DESC LIMIT 1
+
+Question: Show names, results and bulgarian commanders of the battles with no ships lost in the 'English Channel'.
+SELECT

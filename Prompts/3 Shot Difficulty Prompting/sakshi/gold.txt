@@ -1,0 +1,10 @@
+SELECT count(DISTINCT allergytype) FROM Allergy_type    allergy_1
+SELECT Date FROM debate WHERE Num_of_Audience  >  150   debate
+SELECT T3.Name ,  T2.Date ,  T2.Venue FROM debate_people AS T1 JOIN debate AS T2 ON T1.Debate_ID  =  T2.Debate_ID JOIN people AS T3 ON T1.Affirmative  =  T3.People_ID  debate
+SELECT Zip_code FROM county WHERE County_name  =  \"Howard\"    election
+SELECT T2.Comptroller FROM election AS T1 JOIN party AS T2 ON T1.Party  =  T2.Party_ID WHERE T1.District  =  1 OR T1.District  =  2 election
+SELECT Total_Horses FROM farm ORDER BY Total_Horses ASC farm
+SELECT Census_Ranking FROM city WHERE Status !=  \"Village\"    farm
+SELECT T2.Name ,  T1.Location FROM railway AS T1 JOIN train AS T2 ON T1.Railway_ID  =  T2.Railway_ID    railway
+SELECT LOCATION ,  COUNT(*) FROM railway GROUP BY LOCATION  railway
+SELECT name FROM stadium ORDER BY capacity DESC LIMIT 1 swimming

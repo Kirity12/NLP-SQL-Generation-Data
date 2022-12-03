@@ -1,2 +1,2 @@
-# Natural-Language-Processing-Code-Generation
-Natural Language Processing: Code Generation
+# SQL Code Generation Data Driven Approach
+Generating SQL queries with GPT3 using different prompts
